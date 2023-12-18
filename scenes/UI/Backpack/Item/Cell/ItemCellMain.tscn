@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyvsgoikmj1u8"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Cell/ItemCellMain.cs" id="1_ln7x5"]
+[ext_resource type="PackedScene" uid="uid://c6fn5rjgkc5mt" path="res://scenes/UI/Backpack/Item/Cell/Views/ItemCellCarcassView.tscn" id="2_gcs1f"]
+
+[node name="ItemCellMain" type="Node"]
+script = ExtResource("1_ln7x5")
+view = ExtResource("2_gcs1f")

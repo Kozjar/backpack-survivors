@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://vfu0wuvlby1k"]
+
+[ext_resource type="Script" path="res://scenes/Components/unit/DamageReceiveComponent.cs" id="1_swrsg"]
+[ext_resource type="Shader" path="res://assets/shaders/Damage.gdshader" id="2_h5wmr"]
+[ext_resource type="PackedScene" uid="uid://ootaeyx24f8q" path="res://scenes/UI/DamageLabel.tscn" id="3_f13dn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pq3jo"]
+size = Vector2(20, 37)
+
+[node name="DamageReceive" type="Area2D"]
+collision_mask = 8
+script = ExtResource("1_swrsg")
+damageShader = ExtResource("2_h5wmr")
+damageLabel = ExtResource("3_f13dn")
+damageColor = Color(1, 1, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_pq3jo")
+
+[connection signal="area_entered" from="." to="." method="OnReceiveDamage"]

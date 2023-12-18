@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://btunv7nntktfv"]
+
+[ext_resource type="PackedScene" uid="uid://daksmcjghhnq3" path="res://scenes/UI/Backpack/Item/ItemDragPreview.tscn" id="1_qyq36"]
+
+[node name="ItemPreview" instance=ExtResource("1_qyq36")]
+pivot_offset = Vector2(100, 50)
+
+[node name="TextureRect" parent="Control" index="0"]
+offset_right = 200.0
+offset_bottom = 100.0

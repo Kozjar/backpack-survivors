@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0hr0dvb2bjf2"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Cell/ItemCellSupport.cs" id="1_6htrk"]
+[ext_resource type="PackedScene" uid="uid://b48nlqptigmmk" path="res://scenes/UI/Backpack/Item/Cell/Views/ItemCellSupportView.tscn" id="2_p5onp"]
+
+[node name="ItemCellSupport" type="Node"]
+script = ExtResource("1_6htrk")
+view = ExtResource("2_p5onp")

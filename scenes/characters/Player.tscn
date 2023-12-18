@@ -1,0 +1,82 @@
+[gd_scene load_steps=14 format=3 uid="uid://dvsvvf65lffxn"]
+
+[ext_resource type="Texture2D" uid="uid://dk84xax2oye6l" path="res://assets/characters/hero/crow_idle.png" id="1_rlvwk"]
+[ext_resource type="Script" path="res://scripts/scenes/characters/Player.cs" id="2_ujajd"]
+[ext_resource type="Script" path="res://scripts/scenes/managers/XPMagnet.cs" id="3_nmg53"]
+[ext_resource type="Script" path="res://scripts/scenes/managers/XPConsumer.cs" id="4_yf33m"]
+[ext_resource type="Script" path="res://scenes/Components/unit/SkillsComponent.cs" id="5_whc6s"]
+[ext_resource type="PackedScene" uid="uid://b6llk822b1fe4" path="res://scenes/UI/SkillSelection.tscn" id="6_c6lrd"]
+[ext_resource type="Script" path="res://scenes/locations/PlayerMovementController.cs" id="7_lvphj"]
+[ext_resource type="Script" path="res://scenes/Components/unit/SkillsSelectComponent.cs" id="9_nhjul"]
+[ext_resource type="PackedScene" uid="uid://vfu0wuvlby1k" path="res://scenes/Components/unit/DamageReceiveComponent.tscn" id="12_j3wii"]
+[ext_resource type="Script" path="res://scenes/Components/unit/DefinedStatsComponent.cs" id="13_w1pwx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w3qtc"]
+radius = 50.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_36iud"]
+radius = 8.0
+height = 25.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ofp6m"]
+radius = 8.0
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(595, 324)
+texture = ExtResource("1_rlvwk")
+script = ExtResource("2_ujajd")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="XPMagnet" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("3_nmg53")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="XPMagnet"]
+shape = SubResource("CircleShape2D_w3qtc")
+
+[node name="XPConsumer" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("4_yf33m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="XPConsumer"]
+shape = SubResource("CapsuleShape2D_36iud")
+
+[node name="SkillsComponent" type="Node" parent="." node_paths=PackedStringArray("statsComponent")]
+script = ExtResource("5_whc6s")
+statsComponent = NodePath("../Stats")
+
+[node name="PlayerMovementController" type="Node" parent="." node_paths=PackedStringArray("statsComponent", "player")]
+script = ExtResource("7_lvphj")
+statsComponent = NodePath("../Stats")
+player = NodePath("..")
+
+[node name="SkillsSelectComponent" type="Node" parent="." node_paths=PackedStringArray("skillsComponent")]
+script = ExtResource("9_nhjul")
+skillsComponent = NodePath("../SkillsComponent")
+skillSelectionAsset = ExtResource("6_c6lrd")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("13_w1pwx")
+critChance = 0.1
+critDamage = 1.5
+speed = 200.0
+
+[node name="DamageReceive" parent="." node_paths=PackedStringArray("statsComponent", "sprite", "character") instance=ExtResource("12_j3wii")]
+collision_layer = 16
+collision_mask = 4
+statsComponent = NodePath("../Stats")
+sprite = NodePath("..")
+damageColor = Color(0.913725, 0.137255, 0, 1)
+character = NodePath("..")
+
+[node name="CollisionShape2D" parent="DamageReceive" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CapsuleShape2D_ofp6m")
+
+[connection signal="area_entered" from="XPMagnet" to="XPMagnet" method="OnXPInMagnetField"]
+[connection signal="area_entered" from="XPConsumer" to="XPConsumer" method="OnXPCatch"]
+
+[editable path="DamageReceive"]

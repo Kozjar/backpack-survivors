@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7mu0vonbubqn"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Stash/Stash.cs" id="1_08ylt"]
+[ext_resource type="PackedScene" uid="uid://dc5p76amb3lus" path="res://scenes/UI/Backpack/Stash/StashCell.tscn" id="2_lnc6a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghl7c"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+
+[node name="Stash" type="PanelContainer" node_paths=PackedStringArray("cellContainer")]
+custom_minimum_size = Vector2(212, 0)
+offset_right = 212.0
+offset_bottom = 24.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ghl7c")
+script = ExtResource("1_08ylt")
+cellScene = ExtResource("2_lnc6a")
+cellContainer = NodePath("MarginContainer/GridContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+columns = 3

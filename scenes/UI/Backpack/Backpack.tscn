@@ -1,0 +1,105 @@
+[gd_scene load_steps=4 format=3 uid="uid://t43fyfs6o5io"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Backpack.cs" id="1_2uud3"]
+[ext_resource type="PackedScene" uid="uid://b8jue0c4x7nqv" path="res://scenes/UI/Backpack/Cell.tscn" id="1_8f305"]
+[ext_resource type="PackedScene" uid="uid://bv3kpexdtwjtc" path="res://scenes/UI/Backpack/BackpackDragDetector.tscn" id="3_4g4aq"]
+
+[node name="Backpack" type="PanelContainer" node_paths=PackedStringArray("cellsContainer", "dragDetector")]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+script = ExtResource("1_2uud3")
+cellsContainer = NodePath("MarginContainer/GridContainer")
+dragDetector = NodePath("BackpackDragDetector")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 5
+
+[node name="Panel" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel2" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel3" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel4" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel5" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel6" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel7" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel8" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel9" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel10" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel11" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel12" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel13" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel14" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel15" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel16" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel17" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel18" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel19" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel20" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel21" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel22" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel23" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel24" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="Panel25" parent="MarginContainer/GridContainer" instance=ExtResource("1_8f305")]
+layout_mode = 2
+
+[node name="BackpackDragDetector" parent="." node_paths=PackedStringArray("cellsContainer") instance=ExtResource("3_4g4aq")]
+layout_mode = 2
+cellsContainer = NodePath("../MarginContainer/GridContainer")

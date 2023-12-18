@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://docxfywn5y3dc"]
+
+[ext_resource type="Script" path="res://scripts/scenes/props/Attack.cs" id="1_yoqgh"]
+[ext_resource type="Script" path="res://scripts/scenes/props/AttackShape.cs" id="4_anccx"]
+[ext_resource type="PackedScene" uid="uid://dn43e05ve4il8" path="res://scenes/Components/Attack/HitController/SingleHit.tscn" id="5_hl122"]
+[ext_resource type="PackedScene" uid="uid://cvqq0yw5p2u4d" path="res://scenes/Components/Attack/Behaviour/StaticBehaviour.tscn" id="6_kksmw"]
+
+[node name="DaggerAttack" type="Area2D" node_paths=PackedStringArray("shape")]
+collision_layer = 8
+script = ExtResource("1_yoqgh")
+shape = NodePath("Shape")
+
+[node name="Shape" type="Polygon2D" parent="." node_paths=PackedStringArray("collisionPolygon2D")]
+color = Color(1, 1, 1, 0.705882)
+polygon = PackedVector2Array(0, -25, 0, 25, 100, 0)
+script = ExtResource("4_anccx")
+collisionPolygon2D = NodePath("../CollisionPolygon2D")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="SingleHit" parent="." instance=ExtResource("5_hl122")]
+
+[node name="StaticBehaviour" parent="." node_paths=PackedStringArray("attack") instance=ExtResource("6_kksmw")]
+attack = NodePath("..")
+
+[connection signal="area_entered" from="." to="SingleHit" method="OnEnterAttackArea"]
+[connection signal="DamageDeal" from="SingleHit" to="." method="DealDamage"]

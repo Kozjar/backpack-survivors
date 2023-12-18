@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8jue0c4x7nqv"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Cell.cs" id="1_x0d1p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_526s8"]
+bg_color = Color(0.627451, 0.960784, 0.631373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87prh"]
+bg_color = Color(0.898039, 0.764706, 0.364706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mrkdm"]
+bg_color = Color(0.901961, 0.372549, 0.372549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4xpe"]
+
+[node name="MarginContainer" type="MarginContainer" node_paths=PackedStringArray("panel")]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("1_x0d1p")
+successStyle = SubResource("StyleBoxFlat_526s8")
+warningStyle = SubResource("StyleBoxFlat_87prh")
+overlapStyle = SubResource("StyleBoxFlat_mrkdm")
+panel = NodePath("BackpackCell")
+
+[node name="BackpackCell" type="Panel" parent="."]
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_x4xpe")

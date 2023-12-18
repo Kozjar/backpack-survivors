@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://yn2dum05mq6n"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_s0ged"]
+script/source = "using Godot;
+using System;
+using System.Collections.Generic;
+
+public partial class ItemCellsDetector : Control
+{
+  public List<ItemCellConfig> cells;
+  Backpack backpack;
+
+  public override void _Ready()
+  {
+    backpack = Constants.GetBackpack(this);
+  }
+
+  public override void _Process(double delta)
+  {
+    RunDetection();
+  }
+
+  void RunDetection()
+  {
+    Vector2I initialIndex = Vector2I.Zero;
+    var initialCell = DetectInitialCell(ref initialIndex);
+
+    if (initialCell == null)
+    {
+      return;
+    }
+
+    foreach (var cell in cells)
+    {
+      DetectCell(cell, initialCell, initialIndex);
+    }
+  }
+
+  void DetectCell(ItemCellConfig cell, ItemCellConfig initialCell, Vector2I initialIndex)
+  {
+    var cellRelativeIndex = cell.index - initialCell.index;
+
+    BackpackSignals.instance.EmitSignal(BackpackSignals.SignalName.CellDetected, cell);
+  }
+
+  ItemCellConfig DetectInitialCell(ref Vector2I index)
+  {
+    foreach (var cell in cells)
+    {
+      var _index = backpack.IndexAtPosition(GlobalPosition + cell.detectionPosition);
+
+      if (backpack.CellAtIndex(_index) != null)
+      {
+        index = _index;
+        return cell;
+      }
+    }
+
+    return null;
+  }
+}
+"
+
+[node name="ItemCellsDetector" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = SubResource("CSharpScript_s0ged")

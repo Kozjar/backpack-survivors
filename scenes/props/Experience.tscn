@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://4001g8y7ceyf"]
+
+[ext_resource type="Script" path="res://scripts/scenes/props/Experience.cs" id="1_uavfc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kerhp"]
+radius = 8.0
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_uavfc")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.764706, 1, 1, 1)
+polygon = PackedVector2Array(0, 8, -8, 0, 0, -8, 8, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kerhp")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://f6vls03pak6m"]
+
+[ext_resource type="PackedScene" uid="uid://daksmcjghhnq3" path="res://scenes/UI/Backpack/Item/ItemDragPreview.tscn" id="1_o6bel"]
+
+[node name="ItemPreview" instance=ExtResource("1_o6bel")]
+pivot_offset = Vector2(150, 150)
+
+[node name="TextureRect" parent="Control" index="0"]
+custom_minimum_size = Vector2(200, 300)

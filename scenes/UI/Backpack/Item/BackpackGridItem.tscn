@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://byuel6v5a8y65"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/BackpackGridItem.cs" id="1_xtj80"]
+[ext_resource type="PackedScene" uid="uid://4l3fxln770pf" path="res://scenes/UI/Backpack/Item/Cell/Views/ItemGridBodyCell.tscn" id="2_v3uco"]
+[ext_resource type="PackedScene" uid="uid://bkpq4urgsc8rv" path="res://scenes/UI/Backpack/Item/Cell/ItemCellsRepresenter.tscn" id="3_efras"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("textureRect", "bodyRepresenter")]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_xtj80")
+textureRect = NodePath("TextureRect")
+dragCellScene = ExtResource("2_v3uco")
+bodyRepresenter = NodePath("ItemCellsRepresenter")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemCellsRepresenter" parent="." instance=ExtResource("3_efras")]
+layout_mode = 1
+
+[connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]
+[connection signal="mouse_exited" from="." to="." method="OnMouseLeave"]

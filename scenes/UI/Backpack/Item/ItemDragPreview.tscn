@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://daksmcjghhnq3"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/ItemDragPreview.cs" id="1_mdr2f"]
+[ext_resource type="PackedScene" uid="uid://bkpq4urgsc8rv" path="res://scenes/UI/Backpack/Item/Cell/ItemCellsRepresenter.tscn" id="2_ggqyd"]
+
+[node name="ItemPreview" type="Control" node_paths=PackedStringArray("textureNode", "content", "cellsRepresenter")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_mdr2f")
+textureNode = NodePath("Control/TextureRect")
+content = NodePath("Control")
+cellsRepresenter = NodePath("Control/ItemCellsRepresenter")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemCellsRepresenter" parent="Control" instance=ExtResource("2_ggqyd")]
+layout_mode = 1

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://l02f8cyddw4k"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Attacker/AtackerModifier.cs" id="1_oxw50"]
+
+[node name="AtackerModifier" type="Node"]
+script = ExtResource("1_oxw50")

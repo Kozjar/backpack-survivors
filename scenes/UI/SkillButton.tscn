@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdp2coggl2q6i"]
+
+[ext_resource type="Texture2D" uid="uid://rr2irjmviiq6" path="res://assets/icons/wc/BTNAttack.jpg" id="1_3a8bd"]
+[ext_resource type="Script" path="res://scenes/UI/SkillButton.cs" id="1_5qvbu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qp7jo"]
+font_size = 10
+
+[node name="Button" type="Button" node_paths=PackedStringArray("title", "description", "level")]
+custom_minimum_size = Vector2(0, 80)
+offset_right = 400.0
+offset_bottom = 80.0
+alignment = 0
+script = ExtResource("1_5qvbu")
+title = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/Title")
+description = NodePath("HBoxContainer/VBoxContainer/Description")
+level = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/level")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_3a8bd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Melee splash"
+
+[node name="level" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "(Level: 2)"
+
+[node name="Description" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Modify your attack area making it more like a cone."
+label_settings = SubResource("LabelSettings_qp7jo")
+autowrap_mode = 1
+clip_text = true
+text_overrun_behavior = 4

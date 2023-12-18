@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c34otbmym3fuc"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Cell/ItemCellConfig.cs" id="1_enrm7"]
+
+[node name="ItemCellConfig" type="Node"]
+script = ExtResource("1_enrm7")

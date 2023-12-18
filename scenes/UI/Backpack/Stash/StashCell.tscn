@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc5p76amb3lus"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Stash/StashCell.cs" id="1_hd7jm"]
+
+[node name="StashCell" type="Panel" node_paths=PackedStringArray("textureRect")]
+custom_minimum_size = Vector2(60, 60)
+offset_right = 60.0
+offset_bottom = 60.0
+mouse_filter = 1
+script = ExtResource("1_hd7jm")
+textureRect = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+expand_mode = 1
+stretch_mode = 5

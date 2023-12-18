@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn43e05ve4il8"]
+
+[ext_resource type="Script" path="res://scenes/Components/Attack/HitController/SingleHit.cs" id="1_o8uq4"]
+
+[node name="SingleHit" type="Node"]
+script = ExtResource("1_o8uq4")

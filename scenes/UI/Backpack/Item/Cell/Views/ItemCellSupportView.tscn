@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://b48nlqptigmmk"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Cell/Views/ItemCellSupportView.cs" id="1_h3qol"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_swxr7"]
+bg_color = Color(1, 0.803922, 0.482353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gx0ry"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="ItemCellSupportView" type="CenterContainer" node_paths=PackedStringArray("panel")]
+custom_minimum_size = Vector2(100, 100)
+script = ExtResource("1_h3qol")
+activeStyle = SubResource("StyleBoxFlat_swxr7")
+defaultStyle = SubResource("StyleBoxFlat_gx0ry")
+panel = NodePath("Panel")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2

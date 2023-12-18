@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://by100xt7ru1db"]
+
+[ext_resource type="Script" path="res://scenes/Components/AttackComponent.cs" id="1_dbyn6"]
+
+[node name="AttackComponent" type="Node" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_dbyn6")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="OnAttack"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr0ljq6kdiyqk"]
+
+[ext_resource type="PackedScene" uid="uid://cxf1jlllim0f3" path="res://scenes/UI/Backpack/Item/BackpackItemData.tscn" id="1_xy1ul"]
+[ext_resource type="Texture2D" uid="uid://b4dc8s3v5ona7" path="res://assets/Items/Bow.png" id="2_p4fhe"]
+
+[node name="BackpackItemData" instance=ExtResource("1_xy1ul")]
+mouse_filter = 2
+texture = ExtResource("2_p4fhe")
