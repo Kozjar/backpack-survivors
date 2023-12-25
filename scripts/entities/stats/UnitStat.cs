@@ -19,7 +19,7 @@ public class UnitStat
     }
   }
 
-  public UnitStat(float value, string title)
+  public UnitStat(float value, string title = "")
   {
     this.value = value;
     this.title = title;
@@ -29,6 +29,23 @@ public class UnitStat
   public virtual void SetBase(float baseValue){
     this.baseValue = baseValue;
     Value = baseValue;
+  }
+
+  public void UpdateByType(StatChangeType type, float value) {
+    switch (type)
+    {
+      case StatChangeType.Increase:
+        Increase(value);
+        break;
+      case StatChangeType.Flat:
+        Flat(value);
+        break;
+      case StatChangeType.More:
+        More(value);
+        break;
+      default:
+        break;
+    }
   }
 
   public void Flat(float flat)
@@ -44,6 +61,38 @@ public class UnitStat
   public void More(float more)
   {
     Value *= 1 + more;
+  }
+
+  public void RevertByType(StatChangeType type, float value) {
+    switch (type)
+    {
+      case StatChangeType.Increase:
+        RevertFlat(value);
+        break;
+      case StatChangeType.Flat:
+        RevertIncrease(value);
+        break;
+      case StatChangeType.More:
+        RevertMore(value);
+        break;
+      default:
+        break;
+    }
+  }
+
+  public void RevertFlat(float flat)
+  {
+    Value -= flat;
+  }
+
+  public void RevertIncrease(float increased)
+  {
+    Value -= baseValue * increased;
+  }
+
+  public void RevertMore(float more)
+  {
+    Value /= 1 + more;
   }
 
   public virtual void Reset() {

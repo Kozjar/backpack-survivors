@@ -3,5 +3,5 @@ using System;
 
 public partial class CellArea : Area2D
 {
-  [Export] public Cell cell;
+  [Export] public BackpackCell cell;
 }

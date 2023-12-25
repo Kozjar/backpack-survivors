@@ -1,28 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvjqa573r532m"]
+[gd_scene load_steps=8 format=3 uid="uid://bvjqa573r532m"]
 
 [ext_resource type="PackedScene" uid="uid://cxf1jlllim0f3" path="res://scenes/UI/Backpack/Item/BackpackItemData.tscn" id="1_8h586"]
 [ext_resource type="PackedScene" uid="uid://f6vls03pak6m" path="res://scenes/UI/Backpack/Item/Instances/Scythe/ScythDragPreview.tscn" id="2_lph0w"]
 [ext_resource type="PackedScene" uid="uid://byuel6v5a8y65" path="res://scenes/UI/Backpack/Item/BackpackGridItem.tscn" id="3_u3hfd"]
 [ext_resource type="PackedScene" uid="uid://cyvsgoikmj1u8" path="res://scenes/UI/Backpack/Item/Cell/ItemCellMain.tscn" id="3_xvxmd"]
 [ext_resource type="Texture2D" uid="uid://h23njg4lggjv" path="res://assets/Items/Scythe.png" id="4_sl1sk"]
+[ext_resource type="PackedScene" uid="uid://ddnwfnlxtthgq" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Body/BodyModifier.tscn" id="6_bag68"]
+[ext_resource type="PackedScene" uid="uid://dc6wi4kf5iuwm" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Body/BodyHighlighter.tscn" id="7_5lo0x"]
 
-[node name="BackpackItemData" node_paths=PackedStringArray("cells") instance=ExtResource("1_8h586")]
+[node name="BackpackItemData" node_paths=PackedStringArray("modifiers", "cells") instance=ExtResource("1_8h586")]
 draggableItemScene = ExtResource("2_lph0w")
 gridItemScene = ExtResource("3_u3hfd")
+modifiers = [NodePath("BodyModifier")]
 cells = [NodePath("ItemCellMain"), NodePath("ItemCellMain2"), NodePath("ItemCellMain3"), NodePath("ItemCellMain4")]
 texture = ExtResource("4_sl1sk")
 
-[node name="ItemCellMain" parent="." index="0" node_paths=PackedStringArray("item") instance=ExtResource("3_xvxmd")]
-item = NodePath("..")
+[node name="ItemCellMain" parent="." index="0" instance=ExtResource("3_xvxmd")]
 
-[node name="ItemCellMain2" parent="." index="1" node_paths=PackedStringArray("item") instance=ExtResource("3_xvxmd")]
+[node name="ItemCellMain2" parent="." index="1" instance=ExtResource("3_xvxmd")]
 index = Vector2i(1, 0)
-item = NodePath("..")
 
-[node name="ItemCellMain3" parent="." index="2" node_paths=PackedStringArray("item") instance=ExtResource("3_xvxmd")]
+[node name="ItemCellMain3" parent="." index="2" instance=ExtResource("3_xvxmd")]
 index = Vector2i(1, 1)
-item = NodePath("..")
 
-[node name="ItemCellMain4" parent="." index="3" node_paths=PackedStringArray("item") instance=ExtResource("3_xvxmd")]
+[node name="ItemCellMain4" parent="." index="3" instance=ExtResource("3_xvxmd")]
 index = Vector2i(1, 2)
-item = NodePath("..")
+
+[node name="BodyModifier" parent="." index="4" node_paths=PackedStringArray("cellConfigs") instance=ExtResource("6_bag68")]
+cellConfigs = [NodePath("../ItemCellMain"), NodePath("../ItemCellMain2"), NodePath("../ItemCellMain3"), NodePath("../ItemCellMain4")]
+highlighter = ExtResource("7_5lo0x")

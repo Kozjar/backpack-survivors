@@ -10,7 +10,6 @@ public partial class Projectile : Node
 
   public override void _Ready()
   {
-    // GD.Print("proj rady");
   }
 
   public override void _Process(double delta)

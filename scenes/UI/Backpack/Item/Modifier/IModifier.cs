@@ -1,4 +1,4 @@
 public interface IBackpackItemModifier {
-  public void Apply();
-  public void Undo();
+  // public void Apply();
+  // public void Undo();
 }

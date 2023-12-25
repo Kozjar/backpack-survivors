@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddnwfnlxtthgq"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Body/BodyModifier.cs" id="1_eyn15"]
+
+[node name="BodyModifier" type="Node" node_paths=PackedStringArray("cellConfigs")]
+script = ExtResource("1_eyn15")
+cellConfigs = []

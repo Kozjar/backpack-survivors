@@ -9,7 +9,7 @@ public partial class Backpack : PanelContainer
   [Export] Control cellsContainer;
   [Export] Stash stash;
   [Export] BackpackDragDetector dragDetector;
-  List<Cell> cells;
+  List<BackpackCell> cells;
 
   int col = 5;
 
@@ -18,36 +18,33 @@ public partial class Backpack : PanelContainer
 
   public override void _Ready()
   {
-    cells = cellsContainer.GetChildren().OfType<Cell>().ToList();
+    cells = cellsContainer.GetChildren().OfType<BackpackCell>().ToList();
     BackpackSignals.instance.BackpackItemRemoved += RemoveItem;
+    SetCellsIndex(cells.ToArray());
+  }
+
+  void SetCellsIndex(BackpackCell[] cells)
+  {
+    for (int i = 0; i < cells.Length; i++)
+    {
+      cells[i].index = i;
+    }
   }
 
   public override bool _CanDropData(Vector2 atPosition, Variant data)
   {
     var dragData = (StashDragData)data;
-    var itemBodyCells = dragData.Preview.data.cells.OfType<ItemCellMain>();
 
-    foreach (var cell in itemBodyCells)
-    {
-      if (cell.backpackCell == null)
-      {
-        return false;
-      }
-    }
-
-    return true;
+    return dragData.Preview.CanDrop();
   }
 
   public override void _DropData(Vector2 atPosition, Variant data)
   {
-    dragDetector.ClearCellsHover(false);
-
     var dragData = (StashDragData)data;
-    var itemBodyCells = dragData.Preview.data.cells.OfType<ItemCellMain>().Select(cell => cell.backpackCell).ToList();
     var itemData = dragData.Preview.data;
     var gridItem = dragData.GridItem;
 
-    PushToStashOverlappedItems(itemBodyCells, itemData);
+    var itemBodyCells = Array.Find(dragData.Preview.data.modifiers, modifier => modifier is BodyModifier)?.cellConfigs;
 
     if (dragData.StashCell != null)
     {
@@ -59,49 +56,53 @@ public partial class Backpack : PanelContainer
     if (dragData.GridItem != null)
     {
       ClearGridItemCells(dragData.GridItem.data);
-      dragData.GridItem.GlobalPosition = dragData.Preview.StickToGridPosition();
+      itemData.EmitSignal(BackpackItemData.SignalName.RemovedFromBackpack);
     }
 
+    itemData.EmitSignal(BackpackItemData.SignalName.AddedToBackpack);
     SnapItemToGrid(gridItem, dragData.Preview);
-    UpdateCellsData(itemBodyCells, itemData);
+    // UpdateCellsData(itemBodyCells, itemData);
   }
 
-  private void PushToStashOverlappedItems(List<Cell> cells, BackpackItemData whitelistItem)
+  void HandleItemBody(ItemDragPreview preview)
   {
-    var uniqueItems = new List<BackpackItemData>();
-    cells.ForEach(cell =>
-    {
-      if (cell.item != null && !uniqueItems.Contains(cell.item) && cell.item != whitelistItem)
-      {
-        uniqueItems.Add(cell.item);
-      }
-    });
+    // var itemBodyCells = Array.Find(preview.data.modifiers, modifier => modifier is BodyModifier);
+    // var backpackCells = itemBodyCells.Select(cell => cell.data.BackpackCell);
 
-    uniqueItems.ForEach(data =>
-    {
-      stash.AddItem(data);
-      RemoveItem(data);
-    });
+    // PushToStashOverlappedItems(itemBodyCells, preview.data);
   }
 
-  private void UpdateCellsData(List<Cell> cells, BackpackItemData data)
+  // private void PushToStashOverlappedItems(List<BackpackCell> cells, BackpackItemData whitelistItem)
+  // {
+  //   var uniqueItems = new List<BackpackItemData>();
+  //   cells.ForEach(cell =>
+  //   {
+  //     if (cell.Item != null && !uniqueItems.Contains(cell.Item) && cell.Item != whitelistItem)
+  //     {
+  //       uniqueItems.Add(cell.Item);
+  //     }
+  //   });
+
+  //   uniqueItems.ForEach(data =>
+  //   {
+  //     stash.AddItem(data);
+  //     RemoveItem(data);
+  //   });
+  // }
+
+  private void UpdateCellsData(List<BackpackCell> cells, BackpackItemData data)
   {
-    cells.ForEach(cell => cell.item = data);
+    // cells.ForEach(cell => cell.Item = data);
   }
 
   private void ClearGridItemCells(BackpackItemData data)
   {
-    cells.ForEach(cell =>
-    {
-      if (cell.item == data)
-      {
-        cell.item = null;
-      }
-    });
+    cells.ForEach(cell => cell.RemoveItem(data));
   }
 
   public void RemoveItem(BackpackItemData data)
   {
+    data.OnRemovedFromBackpack();
     GetItem(data)?.QueueFree();
     ClearGridItemCells(data);
   }

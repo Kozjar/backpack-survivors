@@ -5,15 +5,44 @@ using System.Linq;
 
 public partial class ItemDragPreview : Control
 {
+  [Export] PackedScene cellsRepresenterScene;
   [Export] public TextureRect textureNode;
   [Export] public Control content;
-  [Export] public ItemCellsRepresenter cellsRepresenter;
+  public List<ItemCellsRepresenter> representers = new();
   public BackpackItemData data;
+  
+  public ItemCellDefaultView[] CellViews => representers.SelectMany(representer => representer.CellViews).ToArray();
 
   public override void _Ready()
   {
+    BuildRepresenters();
     BackpackSignals.draggedItem = this;
-    cellsRepresenter.CellsConfig = data.cells;
+  }
+
+  public bool CanDrop() {
+    foreach (var representer in representers)
+    {
+      if (!representer.modifier.CanDrop(representer.CellViews.Select(view => view.cellData).ToArray()))
+      {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  void BuildRepresenters() {
+    foreach (var modifier in data.modifiers)
+    {
+      if (modifier.highlighter != null)
+      {
+        var representer = cellsRepresenterScene.Instantiate<ItemCellsRepresenter>();
+        representer.Init(modifier, modifier.highlighter);
+        content.AddChild(representer);
+
+        representers.Add(representer);
+      }
+    }
   }
 
   public override void _ExitTree()
@@ -37,9 +66,7 @@ public partial class ItemDragPreview : Control
 
   public Vector2 StickToGridPosition()
   {
-    var originCell = cellsRepresenter.GetChildren().OfType<ItemCellDefaultView>().First();
-
-    GD.Print(GlobalPosition, originCell.Position);
+    var originCell = CellViews.OfType<ItemCellDefaultView>().First();
 
     return content.GlobalPosition - originCell.Position;
   }

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkom1bc8sa83j"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Modifier/ItemModifier.cs" id="1_usoyw"]
+
+[node name="ItemModifier" type="Node" node_paths=PackedStringArray("cellConfigs")]
+script = ExtResource("1_usoyw")
+cellConfigs = []

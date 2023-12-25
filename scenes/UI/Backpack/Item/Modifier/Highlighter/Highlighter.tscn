@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7puha6ci4rky"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Modifier/Highlighter/Highlighter.cs" id="1_habtv"]
+
+[node name="Highlighter" type="Node"]
+script = ExtResource("1_habtv")

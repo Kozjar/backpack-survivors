@@ -1,13 +1,6 @@
 using Godot;
 using System;
 
-public enum StatChangeType
-{
-  Increase,
-  Flat,
-  More,
-}
-
 public class SimpleSkill : SkillAbstract
 {
   StatChangeType changeType;

@@ -5,15 +5,16 @@ using System.Linq;
 public partial class BackpackDragDetector : Control
 {
   [Export] Control cellsContainer;
-  Cell[] cells;
+  BackpackCell[] cells;
 
   int col = 5;
 
   ItemDragPreview draggedItem => BackpackSignals.draggedItem;
+  ItemCellsRepresenter[] RepresentersToDetect => draggedItem?.representers.ToArray();
 
   public override void _Ready()
   {
-    cells = cellsContainer.GetChildren().OfType<Cell>().ToArray();
+    cells = cellsContainer.GetChildren().OfType<BackpackCell>().ToArray();
   }
 
   public override void _Process(double delta)
@@ -27,62 +28,36 @@ public partial class BackpackDragDetector : Control
 
   void RunDetection()
   {
-    foreach (var representation in draggedItem.cellsRepresenter.GetChildren().OfType<ItemCellDefaultView>())
+    foreach (var representer in RepresentersToDetect)
     {
-      var backPackCell = DetectCellByRepresentation(representation);
-      HandleDetectedCell(representation.cell, backPackCell);
+      var views = representer.CellViews;
+      foreach (var view in views)
+      {
+        var backPackCell = DetectCellByRepresentation(view);
+        HandleDetectedCell(view.cellData, backPackCell);
+      }
+
+      var cellsData = views.Select(view => view.cellData).ToArray();
+      representer.highlighter?.Highlight(cellsData);
     }
   }
 
-  Cell DetectCellByRepresentation(ItemCellDefaultView cellRepresentation) {
-    var rotatedPivot = cellRepresentation.Center.Rotated(draggedItem.content.Rotation);
-    return CellAtPosition(cellRepresentation.GlobalPosition + rotatedPivot);
-  }
-
-  void DetectCell(ItemCellConfig cell, ItemCellConfig initialCell, Vector2I initialIndex)
+  BackpackCell DetectCellByRepresentation(ItemCellDefaultView cellView)
   {
-    if (initialCell == null)
-    {
-      cell.backpackCell = null;
-      return;
-    }
-
-    var cellRelativeIndex = cell.index - initialCell.index;
-    cell.backpackCell = CellAtIndex(initialIndex + cellRelativeIndex);
-
-    if (cell.backpackCell != null)
-    {
-      cell.backpackCell.CellCandidate = cell;
-    }
+    var rotatedPivot = cellView.Center.Rotated(draggedItem.content.Rotation);
+    return CellAtPosition(cellView.GlobalPosition + rotatedPivot);
   }
 
-  void HandleDetectedCell(ItemCellConfig itemCell, Cell backpackCell) {
-    if (itemCell == null)
-    {
-      itemCell.backpackCell = null;
-      return;
-    }
-
-    itemCell.backpackCell = backpackCell;
-
-    if (backpackCell != null && itemCell is ItemCellMain)
-    {
-      backpackCell.CellCandidate = itemCell;
-    }
+  void HandleDetectedCell(ItemCellData itemCell, BackpackCell backpackCell)
+  {
+    itemCell.BackpackCell = backpackCell;
   }
 
-  public void ClearCellsHover(bool clearItemCells = true)
+  public void ClearCellsHover()
   {
     foreach (var cell in cells)
     {
-      if (cell.CellCandidate != null)
-      {
-        if (clearItemCells)
-        {
-          cell.CellCandidate.backpackCell = null;
-        }
-        cell.CellCandidate = null;
-      }
+      cell.ResetStyles();
     }
   }
 
@@ -93,30 +68,14 @@ public partial class BackpackDragDetector : Control
     return (Vector2I)(localPosition / Constants.cellSize).Floor();
   }
 
-  public Cell CellAtIndex(Vector2I index)
+  public BackpackCell CellAtIndex(Vector2I index)
   {
     var isInside = index.Y >= 0 && index.Y < col && index.X >= 0 && index.X < col;
     return isInside ? cells[index.Y * col + index.X] : null;
   }
 
-  public Cell CellAtPosition(Vector2 position)
+  public BackpackCell CellAtPosition(Vector2 position)
   {
     return CellAtIndex(IndexAtPosition(position));
-  }
-
-  ItemCellConfig DetectInitialCell(ref Vector2I index)
-  {
-    foreach (var cell in draggedItem.data.cells)
-    {
-      var _index = IndexAtPosition(draggedItem.content.GlobalPosition + cell.detectionPosition);
-
-      if (CellAtIndex(_index) != null)
-      {
-        index = _index;
-        return cell;
-      }
-    }
-
-    return null;
   }
 }

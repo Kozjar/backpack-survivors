@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4s3ns3aw5tff"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Weapon/WeaponStats.cs" id="1_hidwg"]
+
+[node name="WeaponStats" type="Node"]
+script = ExtResource("1_hidwg")

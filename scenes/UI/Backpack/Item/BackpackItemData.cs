@@ -6,17 +6,59 @@ public partial class BackpackItemData : Control
 {
   [Export] public PackedScene draggableItemScene;
   [Export] public PackedScene gridItemScene;
-  [Export] Node[] modifiers;
+  [Export] public ItemModifier[] modifiers;
   [Export] public ItemCellConfig[] cells;
   [Export] public Texture2D texture;
 
-  public ItemCellMain[] BodyCells => cells.OfType<ItemCellMain>().ToArray();
+  [Signal] public delegate void AddedToBackpackEventHandler();
+  [Signal] public delegate void RemovedFromBackpackEventHandler();
+
+  public override void _Ready()
+  {
+    SetCellsData();
+  }
+
+  void SetCellsData()
+  {
+    foreach (var cell in cells)
+    {
+      cell.data.originItem = this;
+    }
+  }
+
+  public void OnRemovedFromBackpack() {
+    EmitSignal(SignalName.RemovedFromBackpack);
+    ClearBackpackDependencies();
+  }
+
+  void ClearBackpackDependencies() {
+    foreach (var cell in cells)
+    {
+      cell.data.BackpackCell = null;
+    }
+  }
 
   public void Apply()
   {
-    foreach (var modifier in modifiers)
-    {
-      ((IBackpackItemModifier)modifier).Apply();
-    }
+    // foreach (var cell in cells)
+    // {
+    //   cell.backpackCell = cell.backpackCellCandidate;
+    // }
+    // foreach (var modifier in modifiers)
+    // {
+    //   ((IBackpackItemModifier)modifier).Apply();
+    // }
+  }
+
+  public void Undo()
+  {
+    // foreach (var modifier in modifiers)
+    // {
+    //   ((IBackpackItemModifier)modifier).Undo();
+    // }
+    // foreach (var cell in cells)
+    // {
+    //   cell.backpackCell = null;
+    // }
   }
 }

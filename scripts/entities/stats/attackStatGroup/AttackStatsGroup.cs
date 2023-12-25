@@ -9,7 +9,7 @@ public class AttackStatGroup
   public float critDamage;
   // public float pierce;
 
-  public AttackStatGroup(UnitStatGroup stats)
+  public AttackStatGroup(StatGroup stats)
   {
     this.damage = stats.GetStat(StatType.Damage).Value;
     this.critChance = stats.GetStat(StatType.CritChance).Value;

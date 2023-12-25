@@ -1,8 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://dr0ljq6kdiyqk"]
+[gd_scene load_steps=12 format=3 uid="uid://dr0ljq6kdiyqk"]
 
 [ext_resource type="PackedScene" uid="uid://cxf1jlllim0f3" path="res://scenes/UI/Backpack/Item/BackpackItemData.tscn" id="1_xy1ul"]
+[ext_resource type="PackedScene" uid="uid://dojxid155u0cq" path="res://scenes/UI/Backpack/Item/Instances/Bow/BowDragPreview.tscn" id="2_jvjii"]
 [ext_resource type="Texture2D" uid="uid://b4dc8s3v5ona7" path="res://assets/Items/Bow.png" id="2_p4fhe"]
+[ext_resource type="PackedScene" uid="uid://byuel6v5a8y65" path="res://scenes/UI/Backpack/Item/BackpackGridItem.tscn" id="3_diaqa"]
+[ext_resource type="PackedScene" uid="uid://cyvsgoikmj1u8" path="res://scenes/UI/Backpack/Item/Cell/ItemCellMain.tscn" id="5_5p7st"]
+[ext_resource type="PackedScene" uid="uid://l02f8cyddw4k" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Weapon/WeaponModifier.tscn" id="6_w6sbe"]
+[ext_resource type="PackedScene" uid="uid://by100xt7ru1db" path="res://scenes/Components/AttackComponent.tscn" id="7_fjmpc"]
+[ext_resource type="PackedScene" uid="uid://bgnvptcxdlhs7" path="res://scenes/props/Attack.tscn" id="8_vh3js"]
+[ext_resource type="PackedScene" uid="uid://b4s3ns3aw5tff" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Weapon/WeaponStats.tscn" id="9_tu4tx"]
+[ext_resource type="PackedScene" uid="uid://ddnwfnlxtthgq" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Body/BodyModifier.tscn" id="10_2cjb4"]
+[ext_resource type="PackedScene" uid="uid://dc6wi4kf5iuwm" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Body/BodyHighlighter.tscn" id="11_gh88b"]
 
-[node name="BackpackItemData" instance=ExtResource("1_xy1ul")]
-mouse_filter = 2
+[node name="BackpackItemData" node_paths=PackedStringArray("modifiers", "cells") instance=ExtResource("1_xy1ul")]
+draggableItemScene = ExtResource("2_jvjii")
+gridItemScene = ExtResource("3_diaqa")
+modifiers = [NodePath("WeaponModifier"), NodePath("BodyModifier")]
+cells = [NodePath("ItemCellMain"), NodePath("ItemCellMain2"), NodePath("ItemCellMain3")]
 texture = ExtResource("2_p4fhe")
+
+[node name="ItemCellMain" parent="." index="0" instance=ExtResource("5_5p7st")]
+
+[node name="ItemCellMain2" parent="." index="1" instance=ExtResource("5_5p7st")]
+index = Vector2i(0, 1)
+
+[node name="ItemCellMain3" parent="." index="2" instance=ExtResource("5_5p7st")]
+index = Vector2i(0, 2)
+
+[node name="WeaponModifier" parent="." index="3" node_paths=PackedStringArray("stats", "cellConfigs") instance=ExtResource("6_w6sbe")]
+attacker = ExtResource("7_fjmpc")
+attackScene = ExtResource("8_vh3js")
+stats = NodePath("WeaponStats")
+ignoreDetection = true
+cellConfigs = [NodePath("../ItemCellMain")]
+
+[node name="WeaponStats" parent="WeaponModifier" index="0" instance=ExtResource("9_tu4tx")]
+damage = 2.0
+
+[node name="BodyModifier" parent="." index="4" node_paths=PackedStringArray("cellConfigs") instance=ExtResource("10_2cjb4")]
+cellConfigs = [NodePath("../ItemCellMain"), NodePath("../ItemCellMain2"), NodePath("../ItemCellMain3")]
+highlighter = ExtResource("11_gh88b")

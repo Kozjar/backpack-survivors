@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://l02f8cyddw4k"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Weapon/WeaponModifier.cs" id="1_lhgit"]
+
+[node name="WeaponModifier" type="Node" node_paths=PackedStringArray("cellConfigs")]
+script = ExtResource("1_lhgit")
+cellConfigs = []

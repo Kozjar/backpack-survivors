@@ -1,11 +1,15 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class ItemCellsRepresenter : Control
 {
   public Func<ItemCellConfig, ItemCellDefaultView> rendererOverride;
+  public Highlighter highlighter;
+  public ItemModifier modifier;
   private ItemCellConfig[] cellsConfig;
-  public ItemCellConfig[] CellsConfig
+  public ItemCellConfig[] CellConfigs
   {
     get => cellsConfig;
     set
@@ -15,20 +19,36 @@ public partial class ItemCellsRepresenter : Control
     }
   }
 
+  List<ItemCellDefaultView> cellViews = new();
+  public ItemCellDefaultView[] CellViews => GetChildren().OfType<ItemCellDefaultView>().ToArray();
+
   public override void _Ready()
   {
     // DisplayCells();
   }
 
+  public void Init(ItemModifier modifier, PackedScene highlighterScene = null)
+  {
+    if (highlighterScene != null)
+    {
+      highlighter = highlighterScene.Instantiate<Highlighter>();
+      AddChild(highlighter);
+    }
+
+    CellConfigs = modifier.cellConfigs;
+    this.modifier = modifier;
+  }
+
   void DisplayCells()
   {
-    foreach (var cell in CellsConfig)
+    foreach (var cell in CellConfigs)
     {
       var scene = InstantiateCell(cell);
+      scene.Init(cell.data.originItem);
       scene.PivotOffset = scene.Center;
-      scene.cell = cell;
       scene.CustomMinimumSize = Vector2.One * Constants.cellSize;
       scene.Position = cell.localPosition;
+      cellViews.Add(scene);
 
       AddChild(scene);
     }

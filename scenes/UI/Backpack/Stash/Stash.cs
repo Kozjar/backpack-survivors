@@ -6,6 +6,11 @@ public partial class Stash : PanelContainer
   [Export] PackedScene cellScene;
   [Export] Control cellContainer;
 
+  public override void _Ready()
+  {
+    BackpackSignals.stash = this;
+  }
+
   public void AddItem(BackpackItemData data) {
     var cell = cellScene.Instantiate<StashCell>();
     data.Reparent(cell);

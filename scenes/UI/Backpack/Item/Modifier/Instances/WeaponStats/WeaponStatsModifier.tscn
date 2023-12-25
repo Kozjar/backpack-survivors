@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0wxc6idelfs2"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Modifier/Instances/WeaponStats/WeaponStatsModifier.cs" id="1_b3jwv"]
+
+[node name="WeaponStatsModifier" type="Node" node_paths=PackedStringArray("supportCells")]
+script = ExtResource("1_b3jwv")
+supportCells = []

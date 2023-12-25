@@ -17,7 +17,7 @@ public partial class BackpackGridItem : Control
   {
     itemsContainer = GetTree().Root.GetNode<Control>("root/UIContainer/BackpackInventory");
     bodyRepresenter.rendererOverride = CreateDragCell;
-    bodyRepresenter.CellsConfig = data.cells.OfType<ItemCellMain>().ToArray();
+    bodyRepresenter.CellConfigs = data.cells.OfType<ItemCellMain>().ToArray();
   }
 
   ItemGridBodyCell CreateDragCell(ItemCellConfig cell)
