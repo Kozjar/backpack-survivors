@@ -33,6 +33,7 @@ cellConfigs = [NodePath("../ItemCellMain")]
 [node name="ItemCellMain2" parent="." index="2" instance=ExtResource("7_cyafr")]
 index = Vector2i(0, 1)
 
-[node name="BodyModifier" parent="." index="3" node_paths=PackedStringArray("cellConfigs") instance=ExtResource("10_pu8d0")]
+[node name="BodyModifier" parent="." index="3" node_paths=PackedStringArray("cellConfigs", "itemData") instance=ExtResource("10_pu8d0")]
 cellConfigs = [NodePath("../ItemCellMain"), NodePath("../ItemCellMain2")]
 highlighter = ExtResource("11_5axpx")
+itemData = NodePath("..")

@@ -44,7 +44,7 @@ public partial class ItemCellsRepresenter : Control
     foreach (var cell in CellConfigs)
     {
       var scene = InstantiateCell(cell);
-      scene.Init(cell.data.originItem);
+      scene.Init(cell.data.originItem, cell.data);
       scene.PivotOffset = scene.Center;
       scene.CustomMinimumSize = Vector2.One * Constants.cellSize;
       scene.Position = cell.localPosition;

@@ -26,16 +26,25 @@ public partial class BackpackItemData : Control
     }
   }
 
-  public void OnRemovedFromBackpack() {
+  public void OnRemovedFromBackpack()
+  {
     EmitSignal(SignalName.RemovedFromBackpack);
     ClearBackpackDependencies();
   }
 
-  void ClearBackpackDependencies() {
+  void ClearBackpackDependencies()
+  {
     foreach (var cell in cells)
     {
       cell.data.BackpackCell = null;
     }
+  }
+
+  public T GetModifier<T>() where T : ItemModifier
+  {
+    var mods = modifiers.OfType<T>().ToArray();
+
+    return mods.Length > 0 ? mods[0] : null;
   }
 
   public void Apply()

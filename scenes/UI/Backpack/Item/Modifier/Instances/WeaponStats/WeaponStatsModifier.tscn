@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0wxc6idelfs2"]
+[gd_scene load_steps=3 format=3 uid="uid://d0wxc6idelfs2"]
 
 [ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Modifier/Instances/WeaponStats/WeaponStatsModifier.cs" id="1_b3jwv"]
+[ext_resource type="PackedScene" uid="uid://dc6wi4kf5iuwm" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Body/BodyHighlighter.tscn" id="2_gipjq"]
 
-[node name="WeaponStatsModifier" type="Node" node_paths=PackedStringArray("supportCells")]
+[node name="WeaponStatsModifier" type="Node" node_paths=PackedStringArray("cellConfigs")]
 script = ExtResource("1_b3jwv")
-supportCells = []
+cellConfigs = []
+highlighter = ExtResource("2_gipjq")

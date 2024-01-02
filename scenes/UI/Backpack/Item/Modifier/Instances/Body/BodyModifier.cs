@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class BodyModifier : ItemModifier
 {
@@ -7,17 +8,23 @@ public partial class BodyModifier : ItemModifier
   {
     foreach (var cell in cellConfigs)
     {
-      // cell
+      cell.data.BackpackCellChanged += RemoveExistedBodyItems;
     }
   }
 
-  void RemoveExistedBodyItems(BackpackCell backpackCell) {
+  void RemoveExistedBodyItems(BackpackCell backpackCell, BackpackCell previous)
+  {
     var cellsToRemove = backpackCell.ItemCellsWithModifier<BodyModifier>();
+    var removedItems = new List<BackpackItemData>();
 
     foreach (var cell in cellsToRemove)
     {
-      BackpackSignals.stash.AddItem(cell.originItem);
-      BackpackSignals.instance.EmitSignal(BackpackSignals.SignalName.BackpackItemRemoved, cell.originItem);
+      if (!removedItems.Contains(cell.originItem) && cell.originItem != itemData)
+      {
+        BackpackSignals.stash.AddItem(cell.originItem);
+        BackpackSignals.instance.EmitSignal(BackpackSignals.SignalName.BackpackItemRemoved, cell.originItem);
+        removedItems.Add(cell.originItem);
+      }
     }
   }
 

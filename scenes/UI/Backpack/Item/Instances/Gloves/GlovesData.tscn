@@ -1,18 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdk48eqo0rbe3"]
+[gd_scene load_steps=12 format=3 uid="uid://bdk48eqo0rbe3"]
 
 [ext_resource type="PackedScene" uid="uid://cxf1jlllim0f3" path="res://scenes/UI/Backpack/Item/BackpackItemData.tscn" id="1_u5pi8"]
 [ext_resource type="PackedScene" uid="uid://byuel6v5a8y65" path="res://scenes/UI/Backpack/Item/BackpackGridItem.tscn" id="2_508x7"]
 [ext_resource type="PackedScene" uid="uid://btunv7nntktfv" path="res://scenes/UI/Backpack/Item/Instances/Gloves/GlovesDragPreview.tscn" id="2_p164e"]
 [ext_resource type="PackedScene" uid="uid://cyvsgoikmj1u8" path="res://scenes/UI/Backpack/Item/Cell/ItemCellMain.tscn" id="3_7g2vw"]
 [ext_resource type="Texture2D" uid="uid://bxopx111t2ekj" path="res://assets/Items/Gloves.png" id="4_o3gmo"]
+[ext_resource type="PackedScene" uid="uid://d0wxc6idelfs2" path="res://scenes/UI/Backpack/Item/Modifier/Instances/WeaponStats/WeaponStatsModifier.tscn" id="8_rcyqk"]
 [ext_resource type="PackedScene" uid="uid://ddnwfnlxtthgq" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Body/BodyModifier.tscn" id="8_s8bdk"]
+[ext_resource type="PackedScene" uid="uid://c34otbmym3fuc" path="res://scenes/UI/Backpack/Item/Cell/ItemCellConfig.tscn" id="9_1xfkv"]
+[ext_resource type="PackedScene" uid="uid://ceheak1mrer1d" path="res://scenes/UI/Backpack/Item/Modifier/Highlighter/SupportHighlighter/SupportHighlighter.tscn" id="9_uu1y0"]
 [ext_resource type="PackedScene" uid="uid://dc6wi4kf5iuwm" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Body/BodyHighlighter.tscn" id="9_w7omj"]
+[ext_resource type="PackedScene" uid="uid://c6fn5rjgkc5mt" path="res://scenes/UI/Backpack/Item/Cell/Views/ItemCellCarcassView.tscn" id="10_f2ilq"]
 
 [node name="BackpackItemData" node_paths=PackedStringArray("modifiers", "cells") instance=ExtResource("1_u5pi8")]
 draggableItemScene = ExtResource("2_p164e")
 gridItemScene = ExtResource("2_508x7")
-modifiers = [NodePath("BodyModifier")]
-cells = [NodePath("ItemCellMain"), NodePath("ItemCellMain2")]
+modifiers = [NodePath("BodyModifier"), NodePath("WeaponStatsModifier")]
+cells = [NodePath("ItemCellMain"), NodePath("ItemCellMain2"), NodePath("ItemCellConfig"), NodePath("ItemCellConfig2")]
 texture = ExtResource("4_o3gmo")
 
 [node name="ItemCellMain" parent="." index="0" instance=ExtResource("3_7g2vw")]
@@ -20,6 +24,22 @@ texture = ExtResource("4_o3gmo")
 [node name="ItemCellMain2" parent="." index="1" instance=ExtResource("3_7g2vw")]
 index = Vector2i(1, 0)
 
-[node name="BodyModifier" parent="." index="2" node_paths=PackedStringArray("cellConfigs") instance=ExtResource("8_s8bdk")]
+[node name="BodyModifier" parent="." index="2" node_paths=PackedStringArray("cellConfigs", "itemData") instance=ExtResource("8_s8bdk")]
 cellConfigs = [NodePath("../ItemCellMain"), NodePath("../ItemCellMain2")]
 highlighter = ExtResource("9_w7omj")
+itemData = NodePath("..")
+
+[node name="WeaponStatsModifier" parent="." index="3" node_paths=PackedStringArray("cellConfigs", "itemData") instance=ExtResource("8_rcyqk")]
+statType = 2
+diff = 10.0
+cellConfigs = [NodePath("../ItemCellConfig2"), NodePath("../ItemCellConfig")]
+highlighter = ExtResource("9_uu1y0")
+itemData = NodePath("..")
+
+[node name="ItemCellConfig" parent="." index="4" instance=ExtResource("9_1xfkv")]
+index = Vector2i(-1, 0)
+view = ExtResource("10_f2ilq")
+
+[node name="ItemCellConfig2" parent="." index="5" instance=ExtResource("9_1xfkv")]
+index = Vector2i(-1, 1)
+view = ExtResource("10_f2ilq")

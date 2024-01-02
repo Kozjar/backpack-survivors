@@ -37,6 +37,9 @@ cellConfigs = [NodePath("../ItemCellMain")]
 [node name="WeaponStats" parent="WeaponModifier" index="0" instance=ExtResource("9_tu4tx")]
 damage = 2.0
 
-[node name="BodyModifier" parent="." index="4" node_paths=PackedStringArray("cellConfigs") instance=ExtResource("10_2cjb4")]
+[node name="BodyModifier" parent="." index="4" node_paths=PackedStringArray("cellConfigs", "itemData") instance=ExtResource("10_2cjb4")]
 cellConfigs = [NodePath("../ItemCellMain"), NodePath("../ItemCellMain2"), NodePath("../ItemCellMain3")]
 highlighter = ExtResource("11_gh88b")
+itemData = NodePath("..")
+
+[editable path="ItemCellMain"]

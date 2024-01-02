@@ -18,13 +18,15 @@ public partial class ItemCellData : Node
     }
   }
 
-  public bool HasModifier<T>() where T : ItemModifier {
+  public bool HasModifier<T>() where T : ItemModifier
+  {
     return Array.Find(AssignedModifiers, mod => mod is T) != null;
   }
 
   public ItemModifier[] AssignedModifiers => originItem.modifiers.Where(ContainsThisCell).ToArray();
 
-  public bool ContainsThisCell(ItemModifier modifier) {
+  public bool ContainsThisCell(ItemModifier modifier)
+  {
     return Array.Find(modifier.cellConfigs, config => config.data == this) != null;
   }
 }

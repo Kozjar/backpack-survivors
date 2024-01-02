@@ -6,6 +6,7 @@ public partial class ItemModifier : Node
   [Export] public bool ignoreDetection = false;
   [Export] public ItemCellConfig[] cellConfigs;
   [Export] public PackedScene highlighter;
+  [Export] public BackpackItemData itemData;
 
   public virtual bool CanDrop(ItemCellData[] cellDatas)
   {

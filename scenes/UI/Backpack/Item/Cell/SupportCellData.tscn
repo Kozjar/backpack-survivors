@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4r7q0kheq4eb"]
+
+[ext_resource type="Script" path="res://scenes/UI/Backpack/Item/Cell/SupportCellData.cs" id="1_ooddt"]
+
+[node name="SupportCellData" type="Node"]
+script = ExtResource("1_ooddt")

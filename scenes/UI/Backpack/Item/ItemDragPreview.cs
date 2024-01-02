@@ -10,7 +10,7 @@ public partial class ItemDragPreview : Control
   [Export] public Control content;
   public List<ItemCellsRepresenter> representers = new();
   public BackpackItemData data;
-  
+
   public ItemCellDefaultView[] CellViews => representers.SelectMany(representer => representer.CellViews).ToArray();
 
   public override void _Ready()
@@ -19,7 +19,8 @@ public partial class ItemDragPreview : Control
     BackpackSignals.draggedItem = this;
   }
 
-  public bool CanDrop() {
+  public bool CanDrop()
+  {
     foreach (var representer in representers)
     {
       if (!representer.modifier.CanDrop(representer.CellViews.Select(view => view.cellData).ToArray()))
@@ -31,7 +32,8 @@ public partial class ItemDragPreview : Control
     return true;
   }
 
-  void BuildRepresenters() {
+  void BuildRepresenters()
+  {
     foreach (var modifier in data.modifiers)
     {
       if (modifier.highlighter != null)
@@ -70,12 +72,20 @@ public partial class ItemDragPreview : Control
 
     return content.GlobalPosition - originCell.Position;
   }
-  
+
   public override void _Input(InputEvent @event)
   {
     if (@event.IsActionPressed("rotate"))
     {
       content.Rotation += Godot.Mathf.Pi / 2;
+    }
+  }
+
+  public void MigrateBackpackCells()
+  {
+    foreach (var cell in CellViews)
+    {
+      cell.MigrateBackpackCell();
     }
   }
 }

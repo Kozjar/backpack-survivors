@@ -8,14 +8,15 @@ public partial class WeaponStatsModifier : ItemModifier
   [Export] StatType statType;
   [Export] StatChangeType operatorType;
   [Export] float diff;
-  [Export] ItemCellSupport[] supportCells;
+  // [Export] ItemCellSupport[] supportCells;
   // BackpackItemData affectedItems = new HashSet<>();
+  public List<BackpackItemData> supportedItems = new();
 
   public override void _Ready()
   {
-    foreach (var cell in supportCells)
+    foreach (var cell in cellConfigs)
     {
-      // cell.backpackCell
+      cell
     }
   }
 
@@ -43,19 +44,17 @@ public partial class WeaponStatsModifier : ItemModifier
   //   }
   // }
 
-  public void Apply()
+  public void Apply(BackpackItemData item)
   {
-    // foreach (var weapon in affectedWeapons)
-    // {
-    //   weapon.stats.StatGroup.GetStat(statType).UpdateByType(operatorType, diff);
-    // }
+    var weapon = item.GetModifier<WeaponModifier>();
+
+    weapon.stats.StatGroup.GetStat(statType).UpdateByType(operatorType, diff);
   }
 
-  public void Undo(WeaponModifier weapon)
+  public void Undo(BackpackItemData item)
   {
-    // foreach (var weapon in affectedWeapons)
-    // {
-      weapon.stats.StatGroup.GetStat(statType).RevertByType(operatorType, diff);
-    // }
+    var weapon = item.GetModifier<WeaponModifier>();
+
+    weapon.stats.StatGroup.GetStat(statType).UpdateByType(operatorType, diff);
   }
 }

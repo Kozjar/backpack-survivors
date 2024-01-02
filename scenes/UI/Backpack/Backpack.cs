@@ -61,6 +61,7 @@ public partial class Backpack : PanelContainer
 
     itemData.EmitSignal(BackpackItemData.SignalName.AddedToBackpack);
     SnapItemToGrid(gridItem, dragData.Preview);
+    dragData.Preview.MigrateBackpackCells();
     // UpdateCellsData(itemBodyCells, itemData);
   }
 

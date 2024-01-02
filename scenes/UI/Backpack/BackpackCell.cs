@@ -13,6 +13,9 @@ public partial class BackpackCell : MarginContainer
   private ItemCellData cellHighlight;
   public List<ItemCellData> itemCells = new();
 
+  [Signal] public delegate void ItemCellAddedEventHandler(ItemCellData cellData);
+  [Signal] public delegate void ItemCellRemovedEventHandler(ItemCellData cellData);
+
   public ItemCellData CellHighlight
   {
     get => cellHighlight;
@@ -27,6 +30,7 @@ public partial class BackpackCell : MarginContainer
         //   OnItemCellOverlap((ItemCellMain)cellHighlight);
         // }
       }
+
       else
       {
         SetCellStatus(BackpackCellStatus.Default);
@@ -34,7 +38,8 @@ public partial class BackpackCell : MarginContainer
     }
   }
 
-  public void ResetStyles() {
+  public void ResetStyles()
+  {
     SetCellStatus(BackpackCellStatus.Default);
   }
 
@@ -52,12 +57,16 @@ public partial class BackpackCell : MarginContainer
     }
   }
 
-  public void AddItemCell(ItemCellData itemCell){
+  public void AddItemCell(ItemCellData itemCell)
+  {
     itemCells.Add(itemCell);
+    EmitSignal(SignalName.ItemCellAdded, itemCell);
   }
 
-  public void RemoveItemCell(ItemCellData itemCell){
+  public void RemoveItemCell(ItemCellData itemCell)
+  {
     itemCells.Remove(itemCell);
+    EmitSignal(SignalName.ItemCellRemoved, itemCell);
   }
 
   public void OnItemCellOverlap(ItemCellData cellHighlight)
@@ -73,15 +82,24 @@ public partial class BackpackCell : MarginContainer
     // SetCellStatus(BackpackCellStatus.Success);
   }
 
-  public void RemoveItem(BackpackItemData item) {
-    itemCells.RemoveAll(cell => cell.originItem == item);
+  public void RemoveItem(BackpackItemData item)
+  {
+    foreach (var cell in itemCells)
+    {
+      if (cell.originItem == item)
+      {
+        RemoveItemCell(cell);
+      }
+    }
   }
 
-  public bool ContainsItem(BackpackItemData item) {
+  public bool ContainsItem(BackpackItemData item)
+  {
     return GetItemCell(item) != null;
   }
 
-  public ItemCellData GetItemCell(BackpackItemData item) {
+  public ItemCellData GetItemCell(BackpackItemData item)
+  {
     return itemCells.Find(cell => cell.originItem == item);
   }
 
@@ -96,11 +114,12 @@ public partial class BackpackCell : MarginContainer
         cellsWithModifiers.Add(cell);
       }
     }
-    
+
     return cellsWithModifiers.ToArray();
   }
 
-  public bool ContainsModifier<T>() where T : BodyModifier {
+  public bool ContainsModifier<T>() where T : BodyModifier
+  {
     return itemCells.Find(cell => cell.HasModifier<T>()) != null;
   }
 
