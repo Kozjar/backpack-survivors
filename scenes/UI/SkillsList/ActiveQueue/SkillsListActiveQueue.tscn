@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjxaa6jjf28b5"]
+
+[ext_resource type="StyleBox" uid="uid://coyi1678qxf7k" path="res://theme/Boxes/BorderlessBox.tres" id="1_aox37"]
+[ext_resource type="PackedScene" uid="uid://cf000mdlnr7ol" path="res://scenes/UI/SkillsList/Scrollable/SkillsListScrollable.tscn" id="1_b2irq"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/ActiveQueue/SkillsListActiveQueue.cs" id="2_3nbym"]
+[ext_resource type="PackedScene" uid="uid://cxb3ajsikkgc7" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/EmptySkillSlot.tscn" id="3_hf46p"]
+[ext_resource type="Resource" uid="uid://bnkhsmbv5yseh" path="res://scenes/UI/SkillsList/Skill/Trigger/TimerTrigger.tres" id="3_q6ym4"]
+[ext_resource type="Resource" uid="uid://bpn8403uoqd6" path="res://scenes/UI/SkillsList/Skill/Attack/ArrowAttack.tres" id="4_t3vub"]
+
+[node name="SkillsListActiveQueue" type="PanelContainer" node_paths=PackedStringArray("skillsContainer")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_aox37")
+script = ExtResource("2_3nbym")
+emptySlotScene = ExtResource("3_hf46p")
+skillsContainer = NodePath("SkillsListScrollable/VBoxContainer/PanelContainer/SkillsListScrollable/MarginContainer/HBoxContainer")
+initialTriggerResource = ExtResource("3_q6ym4")
+initialAttackResource = ExtResource("4_t3vub")
+
+[node name="SkillsListScrollable" parent="." instance=ExtResource("1_b2irq")]
+layout_mode = 2
+
+[node name="Label" parent="SkillsListScrollable/VBoxContainer/PanelContainer2/MarginContainer" index="0"]
+text = "Active Skills"
+
+[editable path="SkillsListScrollable"]

@@ -16,7 +16,7 @@ public partial class WeaponStatsModifier : ItemModifier
   {
     foreach (var cell in cellConfigs)
     {
-      cell
+      // cell
     }
   }
 

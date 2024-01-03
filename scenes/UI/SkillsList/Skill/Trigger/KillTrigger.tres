@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b366jpnyf4g0f"]
+
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/SkillResource.cs" id="1_v16df"]
+
+[resource]
+script = ExtResource("1_v16df")
+Name = "При убийстве"
+Description = "Вызывает атаку, если противник погиб от прошлой атаки."

@@ -1,13 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvsvvf65lffxn"]
+[gd_scene load_steps=12 format=3 uid="uid://dvsvvf65lffxn"]
 
 [ext_resource type="Texture2D" uid="uid://dk84xax2oye6l" path="res://assets/characters/hero/crow_idle.png" id="1_rlvwk"]
 [ext_resource type="Script" path="res://scripts/scenes/characters/Player.cs" id="2_ujajd"]
 [ext_resource type="Script" path="res://scripts/scenes/managers/XPMagnet.cs" id="3_nmg53"]
 [ext_resource type="Script" path="res://scripts/scenes/managers/XPConsumer.cs" id="4_yf33m"]
 [ext_resource type="Script" path="res://scenes/Components/unit/SkillsComponent.cs" id="5_whc6s"]
-[ext_resource type="PackedScene" uid="uid://b6llk822b1fe4" path="res://scenes/UI/SkillSelection.tscn" id="6_c6lrd"]
 [ext_resource type="Script" path="res://scenes/locations/PlayerMovementController.cs" id="7_lvphj"]
-[ext_resource type="Script" path="res://scenes/Components/unit/SkillsSelectComponent.cs" id="9_nhjul"]
 [ext_resource type="PackedScene" uid="uid://vfu0wuvlby1k" path="res://scenes/Components/unit/DamageReceiveComponent.tscn" id="12_j3wii"]
 [ext_resource type="Script" path="res://scenes/Components/unit/DefinedStatsComponent.cs" id="13_w1pwx"]
 
@@ -53,13 +51,12 @@ script = ExtResource("7_lvphj")
 statsComponent = NodePath("../Stats")
 player = NodePath("..")
 
-[node name="SkillsSelectComponent" type="Node" parent="." node_paths=PackedStringArray("skillsComponent")]
-script = ExtResource("9_nhjul")
-skillsComponent = NodePath("../SkillsComponent")
-skillSelectionAsset = ExtResource("6_c6lrd")
-
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("13_w1pwx")
+health = null
+damage = null
+attackSpeed = null
+area = null
 critChance = 0.1
 critDamage = 1.5
 speed = 200.0

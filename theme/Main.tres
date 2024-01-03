@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://tjtdevjpxve3"]
+
+[ext_resource type="StyleBox" uid="uid://8nwu41tx84hi" path="res://theme/Boxes/DefaultFlatBox.tres" id="1_yekmd"]
+
+[resource]
+HBoxContainer/constants/separation = 16
+MarginContainer/constants/margin_bottom = 12
+MarginContainer/constants/margin_left = 12
+MarginContainer/constants/margin_right = 12
+MarginContainer/constants/margin_top = 12
+PanelContainer/styles/panel = ExtResource("1_yekmd")

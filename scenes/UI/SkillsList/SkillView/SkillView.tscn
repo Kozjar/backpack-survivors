@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci30r1ulqo5tv"]
+
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/SkillView/SkillView.cs" id="1_6kxfi"]
+[ext_resource type="Theme" uid="uid://tjtdevjpxve3" path="res://theme/Main.tres" id="1_tgh7d"]
+[ext_resource type="StyleBox" uid="uid://bhf7et1ngjouv" path="res://theme/Boxes/BorderBottomBox.tres" id="4_bbfo5"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/SkillView/SkillDraggableTitle.cs" id="4_jiiqr"]
+
+[node name="SkillView" type="PanelContainer" node_paths=PackedStringArray("nameNode", "skillDraggableTitle")]
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 200.0
+offset_bottom = -448.0
+grow_vertical = 2
+theme = ExtResource("1_tgh7d")
+script = ExtResource("1_6kxfi")
+nameNode = NodePath("VBoxContainer/PanelContainer/MarginContainer/Label")
+skillDraggableTitle = NodePath("VBoxContainer/PanelContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_bbfo5")
+script = ExtResource("4_jiiqr")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "Skill name example"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0

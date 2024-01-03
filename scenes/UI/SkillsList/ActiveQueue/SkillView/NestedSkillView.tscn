@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c22cgmx5dqhjw"]
+
+[ext_resource type="PackedScene" uid="uid://ci30r1ulqo5tv" path="res://scenes/UI/SkillsList/SkillView/SkillView.tscn" id="1_ogc6g"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/NestedSkillView.cs" id="2_qiwvp"]
+[ext_resource type="PackedScene" uid="uid://cj1j0sc8eiaa6" path="res://scenes/UI/SkillsList/SkillView/SkillDropPreview.tscn" id="3_ueaq1"]
+
+[node name="SkillView" node_paths=PackedStringArray("skillsContainer") instance=ExtResource("1_ogc6g")]
+script = ExtResource("2_qiwvp")
+skillsContainer = NodePath("VBoxContainer/ScrollContainer/VBoxContainer_Control_ScrollContainer#MarginContainer/VBoxContainer")
+
+[node name="VBoxContainer_Control_ScrollContainer#MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer_Control_ScrollContainer#MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="PanelContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer_Control_ScrollContainer#MarginContainer" index="1" instance=ExtResource("3_ueaq1")]
+visible = false
+layout_mode = 2

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bpn8403uoqd6"]
+
+[ext_resource type="PackedScene" uid="uid://dhr1t7iddpnu7" path="res://scenes/UI/SkillsList/SkillView/SkillDragPreview.tscn" id="1_0m6yh"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/SkillResource.cs" id="1_iuc8m"]
+[ext_resource type="PackedScene" uid="uid://dktldkmyxmirm" path="res://scenes/UI/SkillsList/SkillView/SkillTitleView.tscn" id="2_onsnf"]
+
+[resource]
+script = ExtResource("1_iuc8m")
+Name = "Стрела"
+Description = "Выпускает треугольный снаряд, который летит по прямой линии, может пробить до 5-ти противников."
+inventoryScene = ExtResource("2_onsnf")
+dragScene = ExtResource("1_0m6yh")

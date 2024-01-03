@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b2dpg1f0fxd3e"]
+
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/SkillResource.cs" id="1_h6oab"]
+
+[resource]
+script = ExtResource("1_h6oab")
+Name = ""
+Description = ""

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://3rufyafccmxf"]
+
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Stash/SkillView/StashSkillView.cs" id="1_kdepu"]
+[ext_resource type="PackedScene" uid="uid://ci30r1ulqo5tv" path="res://scenes/UI/SkillsList/SkillView/SkillView.tscn" id="1_s8aua"]
+
+[node name="StashSkillView" node_paths=PackedStringArray("description") instance=ExtResource("1_s8aua")]
+custom_minimum_size = Vector2(200, 100)
+offset_bottom = -548.0
+script = ExtResource("1_kdepu")
+description = NodePath("VBoxContainer/ScrollContainer/VBoxContainer_Control_ScrollContainer#CenterContainer/Label")
+
+[node name="VBoxContainer_Control_ScrollContainer#CenterContainer" type="CenterContainer" parent="VBoxContainer/ScrollContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer_Control_ScrollContainer#CenterContainer" index="0"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Some long skill description"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

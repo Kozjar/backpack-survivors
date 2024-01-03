@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dktldkmyxmirm"]
+
+[ext_resource type="PackedScene" uid="uid://ci30r1ulqo5tv" path="res://scenes/UI/SkillsList/SkillView/SkillView.tscn" id="1_7einy"]
+[ext_resource type="StyleBox" uid="uid://dc5hlr3konmc7" path="res://theme/Boxes/BorderBottomlessBox.tres" id="2_dd4u8"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/SkillView/SkillTitleView.cs" id="3_w72mj"]
+
+[node name="SkillView" instance=ExtResource("1_7einy")]
+offset_bottom = -607.0
+theme_override_styles/panel = ExtResource("2_dd4u8")
+script = ExtResource("3_w72mj")
+
+[node name="ScrollContainer" parent="VBoxContainer" index="1"]
+visible = false

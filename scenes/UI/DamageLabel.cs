@@ -17,7 +17,7 @@ public partial class DamageLabel : Label
     var tween = GetTree().CreateTween();
     tween.Parallel().TweenProperty(this, "modulate", new Color(Modulate.R, Modulate.G, Modulate.B, 0), 0.8f);
     tween.Parallel().TweenProperty(this, "position", new Vector2(Position.X, Position.Y - 10f), 0.8f);
-    tween.TweenCallback(Callable.From(QueueFree));
+    // tween.TweenCallback(Callable.From(QueueFree));
   }
 
   private Vector2 CalcPosition(Sprite2D character)

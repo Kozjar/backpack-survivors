@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bamax8qnso6p6"]
+
+[ext_resource type="PackedScene" uid="uid://c22cgmx5dqhjw" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/NestedSkillView.tscn" id="1_opmi5"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/TriggerView/TriggerView.cs" id="2_hh007"]
+
+[node name="SkillView" instance=ExtResource("1_opmi5")]
+script = ExtResource("2_hh007")

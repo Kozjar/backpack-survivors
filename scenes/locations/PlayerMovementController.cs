@@ -16,6 +16,8 @@ public partial class PlayerMovementController : Node
     if (Input.IsActionPressed("ui_up")) direction.Y -= 1;
     if (Input.IsActionPressed("ui_down")) direction.Y += 1;
 
+
+
     player.Position += direction.Normalized() * (float)delta * Speed;
   }
 }
