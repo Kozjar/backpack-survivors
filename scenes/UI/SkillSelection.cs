@@ -10,7 +10,8 @@ public partial class SkillSelection : PanelContainer
   [Export] PackedScene skillButtonAsset;
   [Export] Node container;
 
-  public void ShowSkills(List<SkillAbstract> skills) {
+  public void ShowSkills(List<SkillAbstract> skills)
+  {
     foreach (var skill in skills)
     {
       var skillButtonScene = skillButtonAsset.Instantiate<SkillButton>();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b088f57ey5y0h"]
+[gd_scene load_steps=27 format=3 uid="uid://b088f57ey5y0h"]
 
 [ext_resource type="TileSet" uid="uid://bistmljm6y6w8" path="res://land.tres" id="1_m73fj"]
 [ext_resource type="Script" path="res://scenes/managers/LandMap.cs" id="2_8tnnd"]
@@ -16,6 +16,15 @@
 [ext_resource type="Resource" uid="uid://b2dpg1f0fxd3e" path="res://scenes/UI/SkillsList/Skill/Trigger/HitTrigger.tres" id="14_xrjs8"]
 [ext_resource type="PackedScene" uid="uid://b65sr7bcn7kh3" path="res://scenes/UI/SkillsList/Store/SkillQueueStore.tscn" id="15_77bw2"]
 [ext_resource type="Resource" uid="uid://uxyui565lhn8" path="res://scenes/UI/SkillsList/Skill/Trigger/EndTrigger.tres" id="15_xwpgq"]
+[ext_resource type="Script" path="res://scenes/locations/Cutscenes.cs" id="17_kyve0"]
+[ext_resource type="PackedScene" uid="uid://eplqkxglvv87" path="res://scenes/locations/Cutscene/EntryTitles/EntryTitles.tscn" id="18_m3xi6"]
+[ext_resource type="PackedScene" uid="uid://dopnjssiwp0vl" path="res://scenes/locations/Cutscene/Exposition/Exposition.tscn" id="19_pnvvk"]
+[ext_resource type="PackedScene" uid="uid://byb05goiu4mc" path="res://scenes/locations/Cutscene/Departure/Departure.tscn" id="20_a7n3r"]
+[ext_resource type="PackedScene" uid="uid://cx74dr6as1kpl" path="res://scenes/locations/Cutscene/Arrival/Arrival.tscn" id="21_2t8sp"]
+[ext_resource type="PackedScene" uid="uid://b4sag8u1oslqi" path="res://scenes/locations/Cutscene/FirstBossMeet/FirstBossMeet.tscn" id="22_b5tvb"]
+[ext_resource type="PackedScene" uid="uid://bjkojh7xs7aem" path="res://scenes/locations/Cutscene/FinalBossMeet/FinalBossMeet.tscn" id="23_c8dk0"]
+[ext_resource type="PackedScene" uid="uid://bhygwka0sxsdd" path="res://scenes/locations/Cutscene/Ending/Ending.tscn" id="24_yj6t6"]
+[ext_resource type="PackedScene" uid="uid://b14jpcqjqkrbb" path="res://scenes/locations/Cutscene/Death/Death.tscn" id="25_3y687"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxrmx"]
 content_margin_left = 10.0
@@ -45,15 +54,6 @@ z_index = 1
 position = Vector2(0, 0)
 scale = Vector2(2, 2)
 
-[node name="XPConsumer" parent="Elements/Player" index="2"]
-xpRequired = null
-
-[node name="Stats" parent="Elements/Player" index="5"]
-health = null
-damage = null
-attackSpeed = null
-area = null
-
 [node name="ChainAttack" parent="Elements/Player" index="7" node_paths=PackedStringArray("activeQueue")]
 activeQueue = NodePath("../../../UIContainer/RootUI/VBoxContainer/SkillsList/SkillsList/SkillsListActiveQueue")
 
@@ -81,18 +81,6 @@ player = NodePath("../Player")
 
 [node name="Stats" parent="Elements/Enemy" index="3"]
 health = 100000.0
-damage = null
-attackSpeed = null
-area = null
-critChance = null
-critDamage = null
-speed = null
-
-[node name="PeriodicHit" parent="Elements/Enemy/DeathAura" index="1"]
-cooldownTime = null
-
-[node name="Node" parent="Elements/Enemy" index="6"]
-xpGain = null
 
 [node name="Enemy2" parent="Elements" node_paths=PackedStringArray("player") instance=ExtResource("5_qexct")]
 position = Vector2(0, -254)
@@ -100,18 +88,6 @@ player = NodePath("../Player")
 
 [node name="Stats" parent="Elements/Enemy2" index="3"]
 health = 100000.0
-damage = null
-attackSpeed = null
-area = null
-critChance = null
-critDamage = null
-speed = null
-
-[node name="PeriodicHit" parent="Elements/Enemy2/DeathAura" index="1"]
-cooldownTime = null
-
-[node name="Node" parent="Elements/Enemy2" index="6"]
-xpGain = null
 
 [node name="Enemy3" parent="Elements" node_paths=PackedStringArray("player") instance=ExtResource("5_qexct")]
 position = Vector2(-72, -133)
@@ -119,18 +95,6 @@ player = NodePath("../Player")
 
 [node name="Stats" parent="Elements/Enemy3" index="3"]
 health = 100000.0
-damage = null
-attackSpeed = null
-area = null
-critChance = null
-critDamage = null
-speed = null
-
-[node name="PeriodicHit" parent="Elements/Enemy3/DeathAura" index="1"]
-cooldownTime = null
-
-[node name="Node" parent="Elements/Enemy3" index="6"]
-xpGain = null
 
 [node name="UIContainer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -187,7 +151,17 @@ skillsListStash = NodePath("../SkillsList/SkillsList/SkillsListStash")
 z_index = 10
 position = Vector2(-1, -1)
 
-[node name="Cutscenes" type="Node" parent="."]
+[node name="Cutscenes" type="Node" parent="." node_paths=PackedStringArray("container")]
+script = ExtResource("17_kyve0")
+entryTitles = ExtResource("18_m3xi6")
+exposition = ExtResource("19_pnvvk")
+departure = ExtResource("20_a7n3r")
+arrival = ExtResource("21_2t8sp")
+firstBossMeet = ExtResource("22_b5tvb")
+finalBossMeet = ExtResource("23_c8dk0")
+ending = ExtResource("24_yj6t6")
+death = ExtResource("25_3y687")
+container = NodePath("../UIContainer")
 
 [editable path="Elements/Player"]
 [editable path="Elements/Player/DamageReceive"]

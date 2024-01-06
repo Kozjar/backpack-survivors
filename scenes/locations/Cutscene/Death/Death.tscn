@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://b14jpcqjqkrbb"]
+[gd_scene load_steps=2 format=3 uid="uid://b14jpcqjqkrbb"]
+
+[ext_resource type="Script" path="res://scenes/locations/Cutscene/Death/Death.cs" id="1_ktqpa"]
 
 [node name="Death" type="Node"]
+script = ExtResource("1_ktqpa")

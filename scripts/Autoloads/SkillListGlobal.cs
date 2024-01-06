@@ -85,9 +85,15 @@ public partial class SkillListGlobal : Autoload<SkillListGlobal>
     return "Другое";
   }
 
+  public Node GameNode => GetTree().Root.GetNode("root");
+
   public void ToggleGameplay()
   {
-    var node = GetTree().Root.GetNode("root").GetTree();
-    node.Paused = !node.Paused;
+    SetGameState(!GameNode.GetTree().Paused);
+  }
+
+  public void SetGameState(bool isRunning)
+  {
+    GameNode.GetTree().Paused = isRunning;
   }
 }

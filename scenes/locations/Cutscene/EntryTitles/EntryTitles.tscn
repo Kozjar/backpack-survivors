@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://eplqkxglvv87"]
+[gd_scene load_steps=4 format=3 uid="uid://eplqkxglvv87"]
+
+[ext_resource type="Script" path="res://scenes/locations/Cutscene/EntryTitles/EntryTitles.cs" id="1_w1mqc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fo2ye"]
 bg_color = Color(0.196078, 0.196078, 0.196078, 1)
@@ -6,7 +8,9 @@ bg_color = Color(0.196078, 0.196078, 0.196078, 1)
 [sub_resource type="SystemFont" id="SystemFont_tolyk"]
 font_names = PackedStringArray("Cursive")
 
-[node name="EntryTitles" type="Node"]
+[node name="EntryTitles" type="Node" node_paths=PackedStringArray("teamTitle")]
+script = ExtResource("1_w1mqc")
+teamTitle = NodePath("Control/PanelContainer/Label")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

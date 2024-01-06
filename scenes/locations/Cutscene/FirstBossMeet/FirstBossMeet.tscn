@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://b4sag8u1oslqi"]
+[gd_scene load_steps=2 format=3 uid="uid://b4sag8u1oslqi"]
+
+[ext_resource type="Script" path="res://scenes/locations/Cutscene/FirstBossMeet/FirstBossMeet.cs" id="1_py5qi"]
 
 [node name="FirstBossMeet" type="Node"]
+script = ExtResource("1_py5qi")

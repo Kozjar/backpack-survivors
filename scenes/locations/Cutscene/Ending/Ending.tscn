@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://bhygwka0sxsdd"]
+[gd_scene load_steps=2 format=3 uid="uid://bhygwka0sxsdd"]
+
+[ext_resource type="Script" path="res://scenes/locations/Cutscene/Ending/Ending.cs" id="1_7y8wi"]
 
 [node name="Ending" type="Node"]
+script = ExtResource("1_7y8wi")

@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://bjkojh7xs7aem"]
+[gd_scene load_steps=2 format=3 uid="uid://bjkojh7xs7aem"]
+
+[ext_resource type="Script" path="res://scenes/locations/Cutscene/FinalBossMeet/FinalBossMeet.cs" id="1_mbs8u"]
 
 [node name="FinalBossMeet" type="Node"]
+script = ExtResource("1_mbs8u")

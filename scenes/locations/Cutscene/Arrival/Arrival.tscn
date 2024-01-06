@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://cx74dr6as1kpl"]
+[gd_scene load_steps=2 format=3 uid="uid://cx74dr6as1kpl"]
+
+[ext_resource type="Script" path="res://scenes/locations/Cutscene/Arrival/Arrival.cs" id="1_fers5"]
 
 [node name="Arrival" type="Node"]
+script = ExtResource("1_fers5")

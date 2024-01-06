@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://byb05goiu4mc"]
+[gd_scene load_steps=2 format=3 uid="uid://byb05goiu4mc"]
+
+[ext_resource type="Script" path="res://scenes/locations/Cutscene/Departure/Departure.cs" id="1_ceaqv"]
 
 [node name="Departure" type="Node"]
+script = ExtResource("1_ceaqv")
