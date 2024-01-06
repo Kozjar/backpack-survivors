@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjdaoa85by1mg"]
+
+[ext_resource type="Theme" uid="uid://tjtdevjpxve3" path="res://theme/Main.tres" id="1_s6jpx"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Store/SkillSelection/QueueSkillSelection.cs" id="2_2602w"]
+[ext_resource type="Theme" uid="uid://bg3e1ym4l0u6q" path="res://theme/HoverTheme.tres" id="3_rln8s"]
+[ext_resource type="Texture2D" uid="uid://dkkfjqq35w4js" path="res://assets/icons/wc/BTNAdvancedStrengthOfTheWild.jpg" id="3_sw2g8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eav5a"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="SkillSelection" type="PanelContainer" node_paths=PackedStringArray("nameNode", "descriptionNode", "typeNode", "iconNode")]
+custom_minimum_size = Vector2(600, 0)
+offset_right = 600.0
+offset_bottom = 126.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_s6jpx")
+script = ExtResource("2_2602w")
+nameNode = NodePath("MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Name")
+descriptionNode = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Description")
+typeNode = NodePath("MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Type")
+iconNode = NodePath("MarginContainer/HBoxContainer/PanelContainer/TextureRect")
+hoverTheme = ExtResource("3_rln8s")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_eav5a")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("3_sw2g8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "При нанесении урона"
+
+[node name="Type" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.870588, 0.870588, 0.870588, 1)
+theme_override_font_sizes/font_size = 16
+text = "Триггер"
+
+[node name="Description" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.686275, 0.686275, 0.686275, 1)
+theme_override_font_sizes/font_size = 14
+text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's"
+autowrap_mode = 3

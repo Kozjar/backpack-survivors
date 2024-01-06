@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://b65sr7bcn7kh3"]
+
+[ext_resource type="Theme" uid="uid://tjtdevjpxve3" path="res://theme/Main.tres" id="1_83dlh"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Store/SkillQueueStore.cs" id="1_bes6b"]
+[ext_resource type="Resource" uid="uid://bpn8403uoqd6" path="res://scenes/UI/SkillsList/Skill/Attack/ArrowAttack.tres" id="2_domim"]
+[ext_resource type="Resource" uid="uid://bnx31ks783h1u" path="res://scenes/UI/SkillsList/Skill/Attack/ExplosionAttack.tres" id="3_675kg"]
+[ext_resource type="Resource" uid="uid://uxyui565lhn8" path="res://scenes/UI/SkillsList/Skill/Trigger/EndTrigger.tres" id="4_y363k"]
+[ext_resource type="Resource" uid="uid://b2dpg1f0fxd3e" path="res://scenes/UI/SkillsList/Skill/Trigger/HitTrigger.tres" id="5_cy676"]
+[ext_resource type="Resource" uid="uid://b366jpnyf4g0f" path="res://scenes/UI/SkillsList/Skill/Trigger/KillTrigger.tres" id="6_7jy8m"]
+[ext_resource type="Resource" uid="uid://bnkhsmbv5yseh" path="res://scenes/UI/SkillsList/Skill/Trigger/TimerTrigger.tres" id="7_hvxhu"]
+[ext_resource type="PackedScene" uid="uid://cjdaoa85by1mg" path="res://scenes/UI/SkillsList/Store/SkillSelection/QueueSkillSelection.tscn" id="8_j6ngm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6426"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="SkillQueueStore" type="Control" node_paths=PackedStringArray("skillsContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_83dlh")
+script = ExtResource("1_bes6b")
+availableSkills = Array[Resource]([ExtResource("2_domim"), ExtResource("3_675kg"), ExtResource("4_y363k"), ExtResource("5_cy676"), ExtResource("6_7jy8m"), ExtResource("7_hvxhu")])
+skillsContainer = NodePath("PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer")
+skillSelectionScene = ExtResource("8_j6ngm")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -193.0
+offset_right = 215.0
+offset_bottom = 193.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6426")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer2/PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "Выберите новую способность:"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 8

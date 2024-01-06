@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bg3e1ym4l0u6q"]
+
+[ext_resource type="StyleBox" uid="uid://cdh0e58hwe3sf" path="res://theme/hover/boxes/flat.tres" id="1_bu3dx"]
+
+[resource]
+BoxContainer/constants/separation = 4
+MarginContainer/constants/margin_bottom = 12
+MarginContainer/constants/margin_left = 12
+MarginContainer/constants/margin_right = 12
+MarginContainer/constants/margin_top = 12
+PanelContainer/styles/panel = ExtResource("1_bu3dx")

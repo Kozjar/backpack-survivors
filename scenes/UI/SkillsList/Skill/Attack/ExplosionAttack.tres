@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://bnx31ks783h1u"]
+
+[ext_resource type="PackedScene" uid="uid://dhr1t7iddpnu7" path="res://scenes/UI/SkillsList/SkillView/SkillDragPreview.tscn" id="1_7i1uv"]
+[ext_resource type="PackedScene" uid="uid://ovux6r3je6fp" path="res://scenes/Components/Attack/Instances/ExplosionAttack.tscn" id="1_6146r"]
+[ext_resource type="PackedScene" uid="uid://dgs7cm2fsxr8y" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/AttackView/AttackView.tscn" id="2_3803l"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Attack/AttackResource.cs" id="3_3f8qf"]
+
+[resource]
+script = ExtResource("3_3f8qf")
+attackScene = ExtResource("1_6146r")
+damage = 10.0
+Name = "Взрыв"
+Description = "Наносит единожды урон всем противникам в области."
+inventoryScene = ExtResource("2_3803l")
+dragScene = ExtResource("1_7i1uv")

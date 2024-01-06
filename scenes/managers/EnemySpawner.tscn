@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvpkg1c83hber"]
+
+[ext_resource type="Script" path="res://scenes/managers/EnemySpawner.cs" id="1_whifu"]
+
+[sub_resource type="Curve" id="Curve_74ppm"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0286885, 0.28379), 0.0, 0.0, 0, 0, Vector2(0.401639, 0.277424), 0.0, 0.0, 0, 0, Vector2(0.575137, 0.996817), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[node name="EnemySpawner" type="Node"]
+script = ExtResource("1_whifu")
+spawnCurve = SubResource("Curve_74ppm")
