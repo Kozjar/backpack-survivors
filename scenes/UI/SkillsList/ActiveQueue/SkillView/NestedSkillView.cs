@@ -1,7 +1,8 @@
 using Godot;
 using System;
+using System.Linq;
 
-public partial class NestedSkillView : SkillView
+public partial class NestedSkillView : SkillView, ISkillContainer
 {
   [Export] public SkillDropPreview dropPreview;
   [Export] public Control skillsContainer;
@@ -10,15 +11,27 @@ public partial class NestedSkillView : SkillView
   // public override void _Ready()
   // {
   //   base._Ready();
-  // SkillListGlobal.instance.DragStarted += dropPreview.ShowDropPreview;
-  // SkillListGlobal.instance.DragEnded += dropPreview.HideDropPreview;
+  //   SkillListGlobal.instance.DragStarted += dropPreview.ShowDropPreview;
+  //   SkillListGlobal.instance.DragEnded += dropPreview.HideDropPreview;
   // }
 
-  public void AddChildSkill(SkillResource skillResource)
+  public virtual void AddSkill(SkillData skillData)
   {
-    var child = skillResource.inventoryScene.Instantiate<SkillView>();
-    // child.Init(this, skillResource);
+    if (skillData == null)
+    {
+      return;
+    }
 
-    skillsContainer.AddChild(child);
+    var skillNode = skillData.skillResource.inventoryScene.Instantiate<SkillView>();
+    skillNode.Init(this, skillData);
+
+    skillsContainer.AddChild(skillNode);
+  }
+
+  public virtual void RemoveSkill(SkillData skillData)
+  {
+    var skills = skillsContainer.GetChildren().OfType<SkillView>().ToList();
+    var skillToRemove = skills.Find(view => view.skillData == skillData);
+    skillToRemove.QueueFree();
   }
 }

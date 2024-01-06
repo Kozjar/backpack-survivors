@@ -5,10 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dn43e05ve4il8" path="res://scenes/Components/Attack/HitController/SingleHit.tscn" id="5_hl122"]
 [ext_resource type="PackedScene" uid="uid://cvqq0yw5p2u4d" path="res://scenes/Components/Attack/Behaviour/StaticBehaviour.tscn" id="6_kksmw"]
 
-[node name="DaggerAttack" type="Area2D" node_paths=PackedStringArray("shape")]
+[node name="DaggerAttack" type="Area2D"]
 collision_layer = 8
 script = ExtResource("1_yoqgh")
-shape = NodePath("Shape")
 
 [node name="Shape" type="Polygon2D" parent="." node_paths=PackedStringArray("collisionPolygon2D")]
 color = Color(1, 1, 1, 0.705882)

@@ -7,9 +7,10 @@ public partial class DamageReceiveComponent : Area2D
   [Export] Sprite2D sprite;
   [Export] Shader damageShader;
   [Export] PackedScene damageLabel;
-  
+
   [Export] Color damageColor;
   [Export] Sprite2D character;
+  [Export] public Node2D parent;
   ControlledShaderManager shaderManager;
 
   double hitEffectTime = 0.25;
@@ -27,7 +28,7 @@ public partial class DamageReceiveComponent : Area2D
     {
       statsComponent.statGroup.TakeDamage((float)damage);
       shaderManager = new ControlledShaderManager(sprite, "progress", hitEffectTime, damageShader);
-      
+
       var label = damageLabel.Instantiate<DamageLabel>();
       GetTree().Root.GetNode("root/EffectsLabelsContainer").AddChild(label);
       label.Initialize((float)damage, character, damageColor);

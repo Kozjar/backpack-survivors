@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class SingleHit : Node
 {
-  List<Area2D> affectedTargets = new List<Area2D>();
+  List<Area2D> affectedTargets = new();
   [Signal] public delegate void DamageDealEventHandler(DamageReceiveComponent receiver);
 
   public void OnEnterAttackArea(Area2D damageReceiver)

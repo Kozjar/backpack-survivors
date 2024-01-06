@@ -1,8 +1,15 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://uxyui565lhn8"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://uxyui565lhn8"]
 
-[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/SkillResource.cs" id="1_nbuu5"]
+[ext_resource type="PackedScene" uid="uid://dhr1t7iddpnu7" path="res://scenes/UI/SkillsList/SkillView/SkillDragPreview.tscn" id="1_megcm"]
+[ext_resource type="PackedScene" uid="uid://3d2tsk08t5ah" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/TriggerView/TriggerView.tscn" id="2_57ydm"]
+[ext_resource type="Texture2D" uid="uid://dpkd6ypvndlyh" path="res://assets/icons/wc/BTNDarkRitual.jpg" id="2_o2i1l"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Trigger/EndTriggerResource.cs" id="4_3w61t"]
 
 [resource]
-script = ExtResource("1_nbuu5")
-Name = ""
-Description = ""
+script = ExtResource("4_3w61t")
+Name = "При окончании эффекта"
+Description = "Описание"
+inventoryScene = ExtResource("2_57ydm")
+dragScene = ExtResource("1_megcm")
+icon = ExtResource("2_o2i1l")
+skillRarity = 0

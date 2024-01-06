@@ -1,9 +1,10 @@
-[gd_scene format=3 uid="uid://dgs7cm2fsxr8y"]
+[gd_scene load_steps=3 format=3 uid="uid://dgs7cm2fsxr8y"]
 
-[node name="AttackView" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="PackedScene" uid="uid://cx1yvfwrt4im4" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/NestedSkillView.tscn" id="1_x8lv1"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/AttackView/AttackView.cs" id="2_saon2"]
+
+[node name="SkillView" instance=ExtResource("1_x8lv1")]
+custom_minimum_size = Vector2(0, 0)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_saon2")

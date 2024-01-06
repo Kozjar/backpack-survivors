@@ -34,7 +34,7 @@ public partial class PeriodicHit : Node
   {
     targetsOnCooldown.Add(damageReceiver);
 
-    GetTree().CreateTimer(cooldownTime).Timeout += () =>
+    GetTree().CreateTimer(cooldownTime, false).Timeout += () =>
     {
       targetsOnCooldown.Remove(damageReceiver);
 

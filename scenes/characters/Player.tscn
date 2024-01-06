@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvsvvf65lffxn"]
+[gd_scene load_steps=13 format=3 uid="uid://dvsvvf65lffxn"]
 
 [ext_resource type="Texture2D" uid="uid://dk84xax2oye6l" path="res://assets/characters/hero/crow_idle.png" id="1_rlvwk"]
 [ext_resource type="Script" path="res://scripts/scenes/characters/Player.cs" id="2_ujajd"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/scenes/managers/XPConsumer.cs" id="4_yf33m"]
 [ext_resource type="Script" path="res://scenes/Components/unit/SkillsComponent.cs" id="5_whc6s"]
 [ext_resource type="Script" path="res://scenes/locations/PlayerMovementController.cs" id="7_lvphj"]
+[ext_resource type="Script" path="res://scenes/characters/ChainAttack.cs" id="9_r1a0w"]
 [ext_resource type="PackedScene" uid="uid://vfu0wuvlby1k" path="res://scenes/Components/unit/DamageReceiveComponent.tscn" id="12_j3wii"]
 [ext_resource type="Script" path="res://scenes/Components/unit/DefinedStatsComponent.cs" id="13_w1pwx"]
 
@@ -53,10 +54,6 @@ player = NodePath("..")
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("13_w1pwx")
-health = null
-damage = null
-attackSpeed = null
-area = null
 critChance = 0.1
 critDamage = 1.5
 speed = 200.0
@@ -72,6 +69,9 @@ character = NodePath("..")
 [node name="CollisionShape2D" parent="DamageReceive" index="0"]
 position = Vector2(0, 0)
 shape = SubResource("CapsuleShape2D_ofp6m")
+
+[node name="ChainAttack" type="Node" parent="."]
+script = ExtResource("9_r1a0w")
 
 [connection signal="area_entered" from="XPMagnet" to="XPMagnet" method="OnXPInMagnetField"]
 [connection signal="area_entered" from="XPConsumer" to="XPConsumer" method="OnXPCatch"]

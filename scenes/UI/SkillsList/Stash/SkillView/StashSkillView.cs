@@ -8,11 +8,6 @@ public partial class StashSkillView : SkillView
   public override void _Ready()
   {
     base._Ready();
-    description.Text = skillResource.Description;
-  }
-
-  // Called every frame. 'delta' is the elapsed time since the previous frame.
-  public override void _Process(double delta)
-  {
+    description.Text = skillData.skillResource.Description;
   }
 }

@@ -4,21 +4,21 @@ using System;
 public partial class SkillDraggableTitle : PanelContainer
 {
   public ISkillContainer parent;
-  public SkillResource skillResource;
+  public SkillData skillData;
 
-  public void Init(ISkillContainer parent, SkillResource skillResource)
+  public void Init(ISkillContainer parent, SkillData skillData)
   {
     this.parent = parent;
-    this.skillResource = skillResource;
+    this.skillData = skillData;
   }
 
   public override Variant _GetDragData(Vector2 atPosition)
   {
-    var preview = skillResource.dragScene.Instantiate<SkillDragPreview>();
-    preview.Init(skillResource);
+    var preview = skillData.skillResource.dragScene.Instantiate<SkillDragPreview>();
+    preview.Init(skillData);
 
     SetDragPreview(preview);
 
-    return new SkillDragData(skillResource, parent);
+    return new SkillDragData(skillData, parent);
   }
 }

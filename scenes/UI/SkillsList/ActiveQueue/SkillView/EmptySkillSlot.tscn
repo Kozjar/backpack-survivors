@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxb3ajsikkgc7"]
+[gd_scene load_steps=4 format=3 uid="uid://yumgpoadu8rx"]
 
 [ext_resource type="Script" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/EmptySkillSlot.cs" id="1_kipkf"]
 [ext_resource type="PackedScene" uid="uid://cj1j0sc8eiaa6" path="res://scenes/UI/SkillsList/SkillView/SkillDropPreview.tscn" id="2_us8wg"]
@@ -14,7 +14,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="EmptySkillSlot" type="Control"]
+[node name="EmptySkillSlot" type="Control" node_paths=PackedStringArray("dropPreview")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 3
 anchors_preset = 0
@@ -22,6 +22,7 @@ offset_right = 200.0
 offset_bottom = 300.0
 size_flags_vertical = 3
 script = ExtResource("1_kipkf")
+dropPreview = NodePath("PanelContainer")
 
 [node name="PanelContainer" parent="." node_paths=PackedStringArray("childComponents") instance=ExtResource("2_us8wg")]
 visible = false

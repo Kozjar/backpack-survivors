@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cyvsgoikmj1u8" path="res://scenes/UI/Backpack/Item/Cell/ItemCellMain.tscn" id="5_5p7st"]
 [ext_resource type="PackedScene" uid="uid://l02f8cyddw4k" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Weapon/WeaponModifier.tscn" id="6_w6sbe"]
 [ext_resource type="PackedScene" uid="uid://by100xt7ru1db" path="res://scenes/Components/AttackComponent.tscn" id="7_fjmpc"]
-[ext_resource type="PackedScene" uid="uid://bgnvptcxdlhs7" path="res://scenes/props/Attack.tscn" id="8_vh3js"]
+[ext_resource type="PackedScene" uid="uid://bgnvptcxdlhs7" path="res://scenes/Components/Attack/Instances/ArrowAttack.tscn" id="8_vh3js"]
 [ext_resource type="PackedScene" uid="uid://b4s3ns3aw5tff" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Weapon/WeaponStats.tscn" id="9_tu4tx"]
 [ext_resource type="PackedScene" uid="uid://ddnwfnlxtthgq" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Body/BodyModifier.tscn" id="10_2cjb4"]
 [ext_resource type="PackedScene" uid="uid://dc6wi4kf5iuwm" path="res://scenes/UI/Backpack/Item/Modifier/Instances/Body/BodyHighlighter.tscn" id="11_gh88b"]

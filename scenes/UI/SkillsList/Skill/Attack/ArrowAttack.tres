@@ -1,12 +1,16 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bpn8403uoqd6"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://bpn8403uoqd6"]
 
 [ext_resource type="PackedScene" uid="uid://dhr1t7iddpnu7" path="res://scenes/UI/SkillsList/SkillView/SkillDragPreview.tscn" id="1_0m6yh"]
-[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/SkillResource.cs" id="1_iuc8m"]
-[ext_resource type="PackedScene" uid="uid://dktldkmyxmirm" path="res://scenes/UI/SkillsList/SkillView/SkillTitleView.tscn" id="2_onsnf"]
+[ext_resource type="PackedScene" uid="uid://bgnvptcxdlhs7" path="res://scenes/Components/Attack/Instances/ArrowAttack.tscn" id="1_fn3xn"]
+[ext_resource type="PackedScene" uid="uid://dgs7cm2fsxr8y" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/AttackView/AttackView.tscn" id="2_qm2qa"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Attack/AttackResource.cs" id="3_o3ge1"]
 
 [resource]
-script = ExtResource("1_iuc8m")
+script = ExtResource("3_o3ge1")
+attackScene = ExtResource("1_fn3xn")
+damage = 20.0
 Name = "Стрела"
 Description = "Выпускает треугольный снаряд, который летит по прямой линии, может пробить до 5-ти противников."
-inventoryScene = ExtResource("2_onsnf")
+inventoryScene = ExtResource("2_qm2qa")
 dragScene = ExtResource("1_0m6yh")
+skillRarity = 0

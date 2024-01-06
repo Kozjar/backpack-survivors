@@ -1,12 +1,9 @@
 using Godot;
 using System;
 
-public partial class AttackSkill : GodotObject
+public partial class AttackSkill : SkillData
 {
-  public SkillResource skillResource;
-
-  public AttackSkill(SkillResource skillResource)
+  public AttackSkill(AttackResource skillResource) : base(skillResource)
   {
-    this.skillResource = skillResource;
   }
 }

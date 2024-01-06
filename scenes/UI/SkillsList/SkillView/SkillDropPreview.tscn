@@ -15,6 +15,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [node name="PanelContainer" type="PanelContainer"]
+mouse_default_cursor_shape = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_qgxkg")
 script = ExtResource("1_8e2g5")
 
@@ -25,7 +26,7 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.654902)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "Перетащите способность"
 horizontal_alignment = 1
 autowrap_mode = 2

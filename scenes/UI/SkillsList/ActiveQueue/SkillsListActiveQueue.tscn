@@ -3,7 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://coyi1678qxf7k" path="res://theme/Boxes/BorderlessBox.tres" id="1_aox37"]
 [ext_resource type="PackedScene" uid="uid://cf000mdlnr7ol" path="res://scenes/UI/SkillsList/Scrollable/SkillsListScrollable.tscn" id="1_b2irq"]
 [ext_resource type="Script" path="res://scenes/UI/SkillsList/ActiveQueue/SkillsListActiveQueue.cs" id="2_3nbym"]
-[ext_resource type="PackedScene" uid="uid://cxb3ajsikkgc7" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/EmptySkillSlot.tscn" id="3_hf46p"]
+[ext_resource type="PackedScene" uid="uid://yumgpoadu8rx" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/EmptySkillSlot.tscn" id="3_hf46p"]
 [ext_resource type="Resource" uid="uid://bnkhsmbv5yseh" path="res://scenes/UI/SkillsList/Skill/Trigger/TimerTrigger.tres" id="3_q6ym4"]
 [ext_resource type="Resource" uid="uid://bpn8403uoqd6" path="res://scenes/UI/SkillsList/Skill/Attack/ArrowAttack.tres" id="4_t3vub"]
 

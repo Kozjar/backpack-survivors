@@ -3,12 +3,12 @@ using System;
 
 public partial class SkillDragData : GodotObject
 {
-  public SkillResource skillResource { get; set; }
+  public SkillData skillData { get; set; }
   public ISkillContainer previousParent { get; set; }
 
-  public SkillDragData(SkillResource skillResource, ISkillContainer previousParent)
+  public SkillDragData(SkillData skillData, ISkillContainer previousParent = null)
   {
-    this.skillResource = skillResource;
+    this.skillData = skillData;
     this.previousParent = previousParent;
   }
 }

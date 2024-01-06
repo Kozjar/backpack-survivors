@@ -4,18 +4,16 @@ using System;
 public partial class SkillDragPreview : Control
 {
   [Export] public SkillTitleView skillTitleView;
-  // Called when the node enters the scene tree for the first time.
+
   public override void _Ready()
   {
+    SkillListGlobal.instance.DraggedSkill = skillTitleView.skillData;
+    TreeExited += () => SkillListGlobal.instance.DraggedSkill = null;
   }
 
-  // Called every frame. 'delta' is the elapsed time since the previous frame.
-  public override void _Process(double delta)
-  {
-  }
 
-  public void Init(SkillResource skillResource)
+  public void Init(SkillData skillData)
   {
-    skillTitleView.skillResource = skillResource;
+    skillTitleView.skillData = skillData;
   }
 }

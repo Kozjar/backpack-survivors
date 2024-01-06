@@ -17,6 +17,14 @@ public class AttackStatGroup
     // this.pierce = stats.GetStat(StatType.Pierce).Value;
   }
 
+  public AttackStatGroup(float damage, float critChance, float critDamage)
+  {
+    this.damage = damage;
+    this.critChance = critChance;
+    this.critDamage = critDamage;
+    // this.pierce = stats.GetStat(StatType.Pierce).Value;
+  }
+
   public float? EmitHit()
   {
     // pierce -= 1;
