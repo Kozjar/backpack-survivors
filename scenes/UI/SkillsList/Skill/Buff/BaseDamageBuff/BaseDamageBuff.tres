@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://dt73ss113wvd4"]
+
+[ext_resource type="PackedScene" uid="uid://dhr1t7iddpnu7" path="res://scenes/UI/SkillsList/SkillView/SkillDragPreview.tscn" id="1_u2j0q"]
+[ext_resource type="Texture2D" uid="uid://dsebx73xb6mag" path="res://assets/icons/wc/BTNEntanglingRoots.jpg" id="2_bs5d7"]
+[ext_resource type="PackedScene" uid="uid://bx383pu11v5kl" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/BuffView/BuffView.tscn" id="3_3v2pu"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Buff/BaseDamageBuff/BaseDamageBuffResource.cs" id="4_5uw6o"]
+
+[resource]
+script = ExtResource("4_5uw6o")
+inventoryScene = ExtResource("3_3v2pu")
+dragScene = ExtResource("1_u2j0q")
+Name = "Увеличение урона"
+Description = "Увеличивает базовый урон на 30%"
+icon = ExtResource("2_bs5d7")
+skillRarity = 0

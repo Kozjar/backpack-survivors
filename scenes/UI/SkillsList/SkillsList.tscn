@@ -1,11 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://dow66qrghhvlm"]
+[gd_scene load_steps=6 format=3 uid="uid://dow66qrghhvlm"]
 
 [ext_resource type="PackedScene" uid="uid://bjxaa6jjf28b5" path="res://scenes/UI/SkillsList/ActiveQueue/SkillsListActiveQueue.tscn" id="1_gs3ki"]
 [ext_resource type="Script" path="res://scenes/UI/SkillsList/SkillsList.cs" id="1_rvwi3"]
 [ext_resource type="PackedScene" uid="uid://lkff3t7xa8h7" path="res://scenes/UI/SkillsList/Stash/SkillsListStash.tscn" id="2_2h35u"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g730c"]
-bg_color = Color(0.396078, 0.396078, 0.396078, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ad03m"]
+bg_color = Color(0.282353, 0.282353, 0.282353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4m8iv"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
 
 [node name="PanelContainer" type="PanelContainer"]
 anchors_preset = 15
@@ -13,18 +27,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_g730c")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ad03m")
 script = ExtResource("1_rvwi3")
 
-[node name="SkillsList" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="SkillsList" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="SkillsListActiveQueue" parent="SkillsList" instance=ExtResource("1_gs3ki")]
+[node name="SkillsListActiveQueue" parent="MarginContainer/SkillsList" instance=ExtResource("1_gs3ki")]
 layout_mode = 2
-size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="SkillsListStash" parent="SkillsList" instance=ExtResource("2_2h35u")]
+[node name="SkillsListStash" parent="MarginContainer/SkillsList" instance=ExtResource("2_2h35u")]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -91.0
+offset_top = -29.0
+offset_right = 89.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_4m8iv")
+text = "Применить"
+
+[connection signal="pressed" from="Control/Button" to="." method="OnConfirm"]

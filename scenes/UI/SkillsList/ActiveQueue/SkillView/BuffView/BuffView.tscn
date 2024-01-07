@@ -1,9 +1,15 @@
-[gd_scene format=3 uid="uid://bx383pu11v5kl"]
+[gd_scene load_steps=3 format=3 uid="uid://bx383pu11v5kl"]
 
-[node name="BuffView" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="PackedScene" uid="uid://dktldkmyxmirm" path="res://scenes/UI/SkillsList/SkillView/SkillTitleView.tscn" id="1_ropnt"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/BuffView/BuffView.cs" id="2_2fctm"]
+
+[node name="SkillView" instance=ExtResource("1_ropnt")]
+custom_minimum_size = Vector2(0, 0)
+anchors_preset = 0
+anchor_bottom = 0.0
+offset_bottom = 41.0
+grow_vertical = 1
+script = ExtResource("2_2fctm")
+
+[node name="Label" parent="VBoxContainer/PanelContainer/MarginContainer" index="0"]
+autowrap_mode = 3

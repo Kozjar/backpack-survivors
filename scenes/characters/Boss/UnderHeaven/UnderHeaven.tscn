@@ -1,0 +1,117 @@
+[gd_scene load_steps=17 format=3 uid="uid://bpeb83s1d7ni5"]
+
+[ext_resource type="Script" path="res://scenes/characters/Boss/UnderHeaven/UnderHeaven.cs" id="1_hgv5f"]
+[ext_resource type="Texture2D" uid="uid://6u3pq3eualmj" path="res://assets/characters/enemies/Ghost_3.png" id="2_hw0s2"]
+[ext_resource type="PackedScene" uid="uid://vfu0wuvlby1k" path="res://scenes/Components/unit/DamageReceiveComponent.tscn" id="3_hubq8"]
+[ext_resource type="Script" path="res://scenes/Components/unit/DefinedStatsComponent.cs" id="4_tmv48"]
+[ext_resource type="PackedScene" uid="uid://d2300i1ulemc7" path="res://scenes/Components/Attack/Instances/DeathAura.tscn" id="5_uckhq"]
+[ext_resource type="PackedScene" uid="uid://d0uu8a3lfc628" path="res://scenes/UI/HealthBar.tscn" id="6_5v6cb"]
+[ext_resource type="Script" path="res://scenes/Components/unit/XpDropComponent.cs" id="7_acc71"]
+[ext_resource type="PackedScene" uid="uid://4001g8y7ceyf" path="res://scenes/props/Experience.tscn" id="8_pt4yb"]
+[ext_resource type="Script" path="res://scenes/managers/StateMachine/StateMachine.cs" id="9_awkyw"]
+[ext_resource type="Script" path="res://scenes/managers/StateMachine/States/IdleWithRandomExit.cs" id="10_rjjt7"]
+[ext_resource type="Script" path="res://scenes/managers/StateMachine/States/ChasePlayer.cs" id="11_c5tar"]
+[ext_resource type="Script" path="res://scenes/characters/Boss/UnderHeaven/States/DashPrepare.cs" id="12_uq0l2"]
+[ext_resource type="Script" path="res://scenes/characters/Boss/UnderHeaven/States/DashState.cs" id="13_npgkc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_06eo2"]
+radius = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxtux"]
+size = Vector2(70, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvy2e"]
+size = Vector2(70, 90)
+
+[node name="UnderHeaven" type="CharacterBody2D" node_paths=PackedStringArray("statsComponent") groups=["enemies"]]
+collision_layer = 64
+script = ExtResource("1_hgv5f")
+statsComponent = NodePath("Stats")
+avoidanceEffect = 3.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_hw0s2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 21)
+shape = SubResource("CircleShape2D_06eo2")
+
+[node name="DamageReceive" parent="." node_paths=PackedStringArray("statsComponent", "sprite", "labeledCharacter", "parent") instance=ExtResource("3_hubq8")]
+statsComponent = NodePath("../Stats")
+sprite = NodePath("../Sprite2D")
+labeledCharacter = NodePath("../Sprite2D")
+parent = NodePath("..")
+
+[node name="CollisionShape2D" parent="DamageReceive" index="0"]
+shape = SubResource("RectangleShape2D_sxtux")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("4_tmv48")
+health = 10000.0
+
+[node name="DeathAura" parent="." node_paths=PackedStringArray("statsComponent") instance=ExtResource("5_uckhq")]
+statsComponent = NodePath("../Stats")
+
+[node name="CollisionShape2D" parent="DeathAura" index="0"]
+shape = SubResource("RectangleShape2D_qvy2e")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("statsComponent") instance=ExtResource("6_5v6cb")]
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = -34.0
+statsComponent = NodePath("../Stats")
+
+[node name="XpDrop" type="Node" parent="." node_paths=PackedStringArray("statsComponent", "entityRoot")]
+script = ExtResource("7_acc71")
+statsComponent = NodePath("../Stats")
+xpScene = ExtResource("8_pt4yb")
+entityRoot = NodePath("..")
+xpGain = 10
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("9_awkyw")
+initialState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextStates")]
+script = ExtResource("10_rjjt7")
+nextStates = [NodePath("../DashPrepare"), NodePath("../ChaseFast")]
+duration = 0.5
+name = "idle"
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "statsComponent", "nextState")]
+script = ExtResource("11_c5tar")
+entity = NodePath("../..")
+statsComponent = NodePath("../../Stats")
+duration = 5.0
+nextState = NodePath("../Idle")
+name = "chase"
+Weight = 2
+
+[node name="ChaseFast" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "statsComponent", "nextState")]
+script = ExtResource("11_c5tar")
+entity = NodePath("../..")
+statsComponent = NodePath("../../Stats")
+speedMultiplier = 2.0
+duration = 2.0
+nextState = NodePath("../Chase")
+name = "chaseFast"
+Weight = 1
+
+[node name="DashPrepare" type="Node" parent="StateMachine" node_paths=PackedStringArray("lineContainer")]
+script = ExtResource("12_uq0l2")
+dashDistance = 700.0
+lineContainer = NodePath("../..")
+name = "dashPrepare"
+Weight = 1
+
+[node name="dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "nextState")]
+script = ExtResource("13_npgkc")
+entity = NodePath("../..")
+nextState = NodePath("../Chase")
+name = "dash"
+
+[editable path="DamageReceive"]
+[editable path="DeathAura"]

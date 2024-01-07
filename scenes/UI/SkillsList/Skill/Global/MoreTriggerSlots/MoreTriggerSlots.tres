@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://do6w08744rrn1"]
+
+[ext_resource type="PackedScene" uid="uid://c3sr86j2jgft" path="res://scenes/UI/SkillsList/Skill/Global/MoreTriggerSlots/MoreTriggerSlots.tscn" id="1_0bsc6"]
+[ext_resource type="Texture2D" uid="uid://g32oj63fh8li" path="res://assets/icons/wc/BTNDust.jpg" id="2_uk6hb"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Global/SkillGlobalResource.cs" id="3_8gu73"]
+
+[resource]
+script = ExtResource("3_8gu73")
+SkillScene = ExtResource("1_0bsc6")
+Name = "Доп триггер"
+Description = "Дает дополнительный свободный слот для триггера."
+icon = ExtResource("2_uk6hb")
+skillRarity = 0

@@ -29,9 +29,15 @@ public partial class Trigger : SkillData
       return null;
     }
     var position = _position == null ? SkillListGlobal.instance.player.GlobalPosition : _position.Value;
-    var attackNode = ((AttackResource)Attack.skillResource).CreateAttack(SkillListGlobal.instance.projectilesContainer, position);
-    attackNode.LookAt(attackNode.GlobalPosition - SkillListGlobal.instance.GetClosestEnemy(attackNode, excludeEnemy));
-    EmitSignal(SignalName.AttackCreated, attackNode);
+    var attackNode = Attack.CreateAttack(SkillListGlobal.instance.projectilesContainer, position, excludeEnemy);
+    // attackNode.LookAt(attackNode.GlobalPosition - SkillListGlobal.instance.GetClosestEnemy(attackNode, excludeEnemy));
+    SkillListGlobal.instance.OnAttack(attackNode);
+    // EmitSignal(SignalName.AttackCreated, attackNode);
+
+    if (!attackNode.attackBehaviour.initialized)
+    {
+      attackNode.attackBehaviour.InitializePosition(position);
+    }
 
     if (triggerNode.Next != null)
     {

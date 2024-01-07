@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://7yeej7p2fs83"]
+
+[ext_resource type="Script" path="res://scenes/props/Wall/Wall.cs" id="1_hr7ja"]
+[ext_resource type="Texture2D" uid="uid://bix815u04iipg" path="res://assets/icons/wc/BTNAdvancedCreatureCarapace.jpg" id="2_k5o5t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_568hw"]
+size = Vector2(171, 63)
+
+[node name="Wall" type="RigidBody2D"]
+script = ExtResource("1_hr7ja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_568hw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.499996, -11.5)
+scale = Vector2(2.32813, 0.640625)
+texture = ExtResource("2_k5o5t")

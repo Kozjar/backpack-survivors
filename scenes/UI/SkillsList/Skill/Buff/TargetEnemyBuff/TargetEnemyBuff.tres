@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://dus0ip81iqp35"]
+
+[ext_resource type="PackedScene" uid="uid://dhr1t7iddpnu7" path="res://scenes/UI/SkillsList/SkillView/SkillDragPreview.tscn" id="1_vxbi1"]
+[ext_resource type="Texture2D" uid="uid://b40c3mr1tw01x" path="res://assets/icons/wc/BTNEnvenomedSpear.jpg" id="2_qxwst"]
+[ext_resource type="PackedScene" uid="uid://bx383pu11v5kl" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/BuffView/BuffView.tscn" id="3_04mo2"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Buff/TargetEnemyBuff/TargetEnemyBuffResource.cs" id="4_r4hyp"]
+
+[resource]
+script = ExtResource("4_r4hyp")
+inventoryScene = ExtResource("3_04mo2")
+dragScene = ExtResource("1_vxbi1")
+Name = "Наведение на противника"
+Description = "Атаки всегда летят в сторону ближайшего противника."
+icon = ExtResource("2_qxwst")
+skillRarity = 0

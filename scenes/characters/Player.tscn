@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvsvvf65lffxn"]
+[gd_scene load_steps=14 format=3 uid="uid://dvsvvf65lffxn"]
 
 [ext_resource type="Texture2D" uid="uid://dk84xax2oye6l" path="res://assets/characters/hero/crow_idle.png" id="1_rlvwk"]
 [ext_resource type="Script" path="res://scripts/scenes/characters/Player.cs" id="2_ujajd"]
@@ -20,9 +20,13 @@ height = 25.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ofp6m"]
 radius = 8.0
 
-[node name="Sprite2D" type="Sprite2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_76khi"]
+radius = 6.0
+
+[node name="Sprite2D" type="CharacterBody2D"]
 position = Vector2(595, 324)
-texture = ExtResource("1_rlvwk")
+collision_layer = 32
+collision_mask = 32
 script = ExtResource("2_ujajd")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -58,13 +62,14 @@ critChance = 0.1
 critDamage = 1.5
 speed = 200.0
 
-[node name="DamageReceive" parent="." node_paths=PackedStringArray("statsComponent", "sprite", "character") instance=ExtResource("12_j3wii")]
+[node name="DamageReceive" parent="." node_paths=PackedStringArray("statsComponent", "sprite", "labeledCharacter", "parent") instance=ExtResource("12_j3wii")]
 collision_layer = 16
 collision_mask = 4
 statsComponent = NodePath("../Stats")
-sprite = NodePath("..")
+sprite = NodePath("../Sprite2D")
 damageColor = Color(0.913725, 0.137255, 0, 1)
-character = NodePath("..")
+labeledCharacter = NodePath("../Sprite2D")
+parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="DamageReceive" index="0"]
 position = Vector2(0, 0)
@@ -72,6 +77,13 @@ shape = SubResource("CapsuleShape2D_ofp6m")
 
 [node name="ChainAttack" type="Node" parent="."]
 script = ExtResource("9_r1a0w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rlvwk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 7)
+shape = SubResource("CircleShape2D_76khi")
 
 [connection signal="area_entered" from="XPMagnet" to="XPMagnet" method="OnXPInMagnetField"]
 [connection signal="area_entered" from="XPConsumer" to="XPConsumer" method="OnXPCatch"]

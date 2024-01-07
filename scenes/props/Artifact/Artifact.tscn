@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://b332rcsrhq740"]
+
+[ext_resource type="Script" path="res://scenes/props/Artifact/ArtifactMark.cs" id="1_87drq"]
+[ext_resource type="Script" path="res://scenes/props/Artifact/Artifact.cs" id="1_hfwrn"]
+[ext_resource type="Shader" path="res://scenes/Shaders/Circle.gdshader" id="1_p8eue"]
+[ext_resource type="Texture2D" uid="uid://bi8ersdlf47yx" path="res://assets/icons/wc/BTNAdvancedMoonArmor.jpg" id="2_dfn4h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_usson"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.92549, 0.92549, 0.92549, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgst7"]
+shader = ExtResource("1_p8eue")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6dem"]
+size = Vector2(21, 34)
+
+[node name="Artifact" type="Node2D"]
+script = ExtResource("1_hfwrn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Mark" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("artifactNode")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 673.0
+offset_top = 375.0
+offset_right = 673.0
+offset_bottom = 375.0
+script = ExtResource("1_87drq")
+artifactNode = NodePath("../..")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Mark"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_usson")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Mark/PanelContainer"]
+material = SubResource("ShaderMaterial_mgst7")
+layout_mode = 2
+texture = ExtResource("2_dfn4h")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 524288
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, -2)
+shape = SubResource("RectangleShape2D_m6dem")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -22.5
+offset_right = 7.5
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "?"

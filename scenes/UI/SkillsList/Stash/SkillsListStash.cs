@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class SkillsListStash : PanelContainer, ISkillContainer
+public partial class SkillsListStash : Control, ISkillContainer
 {
   [Export] public Control skillsContainer;
   [Export] public PackedScene stashSkillView;
@@ -34,6 +34,13 @@ public partial class SkillsListStash : PanelContainer, ISkillContainer
     if (skillData is Trigger && ((Trigger)skillData).Attack != null)
     {
       AddSkill(((Trigger)skillData).Attack);
+    }
+    if (skillData is AttackSkill attackSkill)
+    {
+      foreach (var buff in attackSkill.buffs)
+      {
+        AddSkill(buff);
+      }
     }
     skillData.Reset();
     var stashSkill = stashSkillView.Instantiate<StashSkillView>();

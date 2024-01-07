@@ -6,6 +6,8 @@ public partial class Attack : Area2D, IAttack
   [Signal] public delegate void DamageDealtEventHandler(Node2D entity);
   ControlledShaderManager shaderManager;
   public AttackStatGroup attackStatGroup;
+  [Export] public AttackBahaviour attackBehaviour;
+  public Node2D excludeEnemy;
 
   // public override void _Process(double delta)
   // {

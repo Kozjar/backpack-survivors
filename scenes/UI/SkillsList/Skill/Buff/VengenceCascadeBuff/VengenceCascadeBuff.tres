@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://beqtnfxjmcu6w"]
+
+[ext_resource type="PackedScene" uid="uid://dhr1t7iddpnu7" path="res://scenes/UI/SkillsList/SkillView/SkillDragPreview.tscn" id="1_74kev"]
+[ext_resource type="Texture2D" uid="uid://br4bujy0pcoxy" path="res://assets/icons/wc/BTNDOCMasterTraining.jpg" id="2_5tf53"]
+[ext_resource type="PackedScene" uid="uid://bx383pu11v5kl" path="res://scenes/UI/SkillsList/ActiveQueue/SkillView/BuffView/BuffView.tscn" id="3_3lxhj"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Buff/VengenceCascadeBuff/VengenceCascadeBuffResource.cs" id="4_vkvn7"]
+
+[resource]
+script = ExtResource("4_vkvn7")
+inventoryScene = ExtResource("3_3lxhj")
+dragScene = ExtResource("1_74kev")
+Name = "Каскад мести"
+Description = "Атаки всегда летят в сторону игрока."
+icon = ExtResource("2_5tf53")
+skillRarity = 0

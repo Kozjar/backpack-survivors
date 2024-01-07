@@ -1,0 +1,6 @@
+do SkillListGlobal.ShowCharacter("emma")
+Эмма: прибытие
+Вы: понял, приступаю
+do SkillListGlobal.HideCharacter()
+
+=> END

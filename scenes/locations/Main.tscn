@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b088f57ey5y0h"]
+[gd_scene load_steps=35 format=3 uid="uid://b088f57ey5y0h"]
 
 [ext_resource type="TileSet" uid="uid://bistmljm6y6w8" path="res://land.tres" id="1_m73fj"]
 [ext_resource type="Script" path="res://scenes/managers/LandMap.cs" id="2_8tnnd"]
@@ -8,23 +8,31 @@
 [ext_resource type="PackedScene" uid="uid://dvpkg1c83hber" path="res://scenes/managers/EnemySpawner.tscn" id="6_vp0jy"]
 [ext_resource type="PackedScene" uid="uid://4001g8y7ceyf" path="res://scenes/props/Experience.tscn" id="6_wbhoa"]
 [ext_resource type="Theme" uid="uid://tjtdevjpxve3" path="res://theme/Main.tres" id="7_v75pq"]
+[ext_resource type="PackedScene" uid="uid://b332rcsrhq740" path="res://scenes/props/Artifact/Artifact.tscn" id="8_0whsa"]
 [ext_resource type="PackedScene" uid="uid://6xgaboatyxtf" path="res://scenes/UI/XPBar.tscn" id="8_k3cjp"]
+[ext_resource type="PackedScene" uid="uid://dmurdw8cnpeu" path="res://scenes/managers/BossSpawner.tscn" id="8_lrjs7"]
+[ext_resource type="Script" path="res://scenes/locations/UIContainer.cs" id="8_s7lix"]
+[ext_resource type="PackedScene" uid="uid://bpeb83s1d7ni5" path="res://scenes/characters/Boss/UnderHeaven/UnderHeaven.tscn" id="9_1m7if"]
 [ext_resource type="PackedScene" uid="uid://dow66qrghhvlm" path="res://scenes/UI/SkillsList/SkillsList.tscn" id="9_hyslg"]
 [ext_resource type="PackedScene" uid="uid://rsngdj163w56" path="res://scenes/UI/StatsList.tscn" id="9_wiav0"]
 [ext_resource type="Resource" uid="uid://bpn8403uoqd6" path="res://scenes/UI/SkillsList/Skill/Attack/ArrowAttack.tres" id="12_21a4c"]
 [ext_resource type="Resource" uid="uid://bnx31ks783h1u" path="res://scenes/UI/SkillsList/Skill/Attack/ExplosionAttack.tres" id="12_s3ef5"]
 [ext_resource type="Resource" uid="uid://b2dpg1f0fxd3e" path="res://scenes/UI/SkillsList/Skill/Trigger/HitTrigger.tres" id="14_xrjs8"]
 [ext_resource type="PackedScene" uid="uid://b65sr7bcn7kh3" path="res://scenes/UI/SkillsList/Store/SkillQueueStore.tscn" id="15_77bw2"]
-[ext_resource type="Resource" uid="uid://uxyui565lhn8" path="res://scenes/UI/SkillsList/Skill/Trigger/EndTrigger.tres" id="15_xwpgq"]
 [ext_resource type="Script" path="res://scenes/locations/Cutscenes.cs" id="17_kyve0"]
+[ext_resource type="PackedScene" uid="uid://de2vwnu5uxdyu" path="res://scenes/UI/Achievements/Achievements.tscn" id="18_eqky7"]
 [ext_resource type="PackedScene" uid="uid://eplqkxglvv87" path="res://scenes/locations/Cutscene/EntryTitles/EntryTitles.tscn" id="18_m3xi6"]
+[ext_resource type="Script" path="res://scenes/locations/GameTimer.cs" id="19_0wkwm"]
 [ext_resource type="PackedScene" uid="uid://dopnjssiwp0vl" path="res://scenes/locations/Cutscene/Exposition/Exposition.tscn" id="19_pnvvk"]
 [ext_resource type="PackedScene" uid="uid://byb05goiu4mc" path="res://scenes/locations/Cutscene/Departure/Departure.tscn" id="20_a7n3r"]
 [ext_resource type="PackedScene" uid="uid://cx74dr6as1kpl" path="res://scenes/locations/Cutscene/Arrival/Arrival.tscn" id="21_2t8sp"]
+[ext_resource type="Resource" uid="uid://dt73ss113wvd4" path="res://scenes/UI/SkillsList/Skill/Buff/BaseDamageBuff/BaseDamageBuff.tres" id="21_j3luw"]
 [ext_resource type="PackedScene" uid="uid://b4sag8u1oslqi" path="res://scenes/locations/Cutscene/FirstBossMeet/FirstBossMeet.tscn" id="22_b5tvb"]
 [ext_resource type="PackedScene" uid="uid://bjkojh7xs7aem" path="res://scenes/locations/Cutscene/FinalBossMeet/FinalBossMeet.tscn" id="23_c8dk0"]
 [ext_resource type="PackedScene" uid="uid://bhygwka0sxsdd" path="res://scenes/locations/Cutscene/Ending/Ending.tscn" id="24_yj6t6"]
 [ext_resource type="PackedScene" uid="uid://b14jpcqjqkrbb" path="res://scenes/locations/Cutscene/Death/Death.tscn" id="25_3y687"]
+[ext_resource type="Resource" uid="uid://dus0ip81iqp35" path="res://scenes/UI/SkillsList/Skill/Buff/TargetEnemyBuff/TargetEnemyBuff.tres" id="27_knuqs"]
+[ext_resource type="Resource" uid="uid://beqtnfxjmcu6w" path="res://scenes/UI/SkillsList/Skill/Buff/VengenceCascadeBuff/VengenceCascadeBuff.tres" id="28_ltjkc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxrmx"]
 content_margin_left = 10.0
@@ -49,15 +57,22 @@ player = NodePath("../Elements/Player")
 [node name="Elements" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Player" parent="Elements" instance=ExtResource("3_nxxqm")]
-z_index = 1
+[node name="Player" parent="Elements" node_paths=PackedStringArray("statsComponent") instance=ExtResource("3_nxxqm")]
 position = Vector2(0, 0)
 scale = Vector2(2, 2)
+statsComponent = NodePath("Stats")
 
 [node name="ChainAttack" parent="Elements/Player" index="7" node_paths=PackedStringArray("activeQueue")]
-activeQueue = NodePath("../../../UIContainer/RootUI/VBoxContainer/SkillsList/SkillsList/SkillsListActiveQueue")
+activeQueue = NodePath("../../../UIContainer/RootUI/VBoxContainer/Control/Control/SkillsList/MarginContainer/SkillsList/SkillsListActiveQueue")
 
 [node name="Spawners" type="Node" parent="Elements/Player"]
+
+[node name="BossSpawner" parent="Elements/Player/Spawners" node_paths=PackedStringArray("path") instance=ExtResource("8_lrjs7")]
+boss = ExtResource("9_1m7if")
+path = NodePath("../EnemySpawn")
+
+[node name="Timer" parent="Elements/Player/Spawners/BossSpawner" index="0"]
+wait_time = 60.0
 
 [node name="EnemySpawn" parent="Elements/Player/Spawners" node_paths=PackedStringArray("camera", "container", "player") instance=ExtResource("4_cu6qv")]
 scale = Vector2(2, 2)
@@ -66,38 +81,30 @@ xpScene = ExtResource("6_wbhoa")
 container = NodePath("../../..")
 player = NodePath("../..")
 
-[node name="EnemySpawner" parent="Elements/Player/Spawners" node_paths=PackedStringArray("path") instance=ExtResource("6_vp0jy")]
-path = NodePath("../EnemySpawn")
+[node name="Tmp" type="Node" parent="Elements"]
+process_mode = 4
+
+[node name="EnemySpawner" parent="Elements/Tmp" node_paths=PackedStringArray("path") instance=ExtResource("6_vp0jy")]
+path = NodePath("../../Player/Spawners/EnemySpawn")
 spawnEntity = ExtResource("5_qexct")
-maxSpawnrate = 10.0
+maxSpawnrate = 4.0
 
 [node name="Projectiles" type="Node2D" parent="Elements"]
 z_index = 10
 z_as_relative = false
 
-[node name="Enemy" parent="Elements" node_paths=PackedStringArray("player") instance=ExtResource("5_qexct")]
-position = Vector2(129, -176)
-player = NodePath("../Player")
+[node name="Artifact" parent="Elements" instance=ExtResource("8_0whsa")]
+position = Vector2(1000, 0)
+
+[node name="Enemy" parent="Elements" instance=ExtResource("5_qexct")]
 
 [node name="Stats" parent="Elements/Enemy" index="3"]
-health = 100000.0
-
-[node name="Enemy2" parent="Elements" node_paths=PackedStringArray("player") instance=ExtResource("5_qexct")]
-position = Vector2(0, -254)
-player = NodePath("../Player")
-
-[node name="Stats" parent="Elements/Enemy2" index="3"]
-health = 100000.0
-
-[node name="Enemy3" parent="Elements" node_paths=PackedStringArray("player") instance=ExtResource("5_qexct")]
-position = Vector2(-72, -133)
-player = NodePath("../Player")
-
-[node name="Stats" parent="Elements/Enemy3" index="3"]
-health = 100000.0
+health = 10000.0
+speed = 0.0
 
 [node name="UIContainer" type="CanvasLayer" parent="."]
 process_mode = 3
+script = ExtResource("8_s7lix")
 
 [node name="RootUI" type="Control" parent="UIContainer"]
 layout_mode = 3
@@ -135,23 +142,95 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 xpManager = NodePath("../../../../Elements/Player/XPConsumer")
 
-[node name="SkillsList" parent="UIContainer/RootUI/VBoxContainer" instance=ExtResource("9_hyslg")]
-visible = false
+[node name="Control" type="Control" parent="UIContainer/RootUI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SkillQueueStore" parent="UIContainer/RootUI/VBoxContainer" node_paths=PackedStringArray("skillsListStash") instance=ExtResource("15_77bw2")]
-visible = false
+[node name="GameTimer" type="Control" parent="UIContainer/RootUI/VBoxContainer/Control" node_paths=PackedStringArray("timer", "timerLabel")]
+process_mode = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("19_0wkwm")
+timer = NodePath("Timer")
+timerLabel = NodePath("MarginContainer/Label")
+
+[node name="Timer" type="Timer" parent="UIContainer/RootUI/VBoxContainer/Control/GameTimer"]
+autostart = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UIContainer/RootUI/VBoxContainer/Control/GameTimer"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 58.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="UIContainer/RootUI/VBoxContainer/Control/GameTimer/MarginContainer"]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="UIContainer/RootUI/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -550.0
+offset_top = -300.0
+offset_right = 550.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillQueueStore" parent="UIContainer/RootUI/VBoxContainer/Control/Control" node_paths=PackedStringArray("skillsListStash", "skillsList") instance=ExtResource("15_77bw2")]
+visible = false
+layout_mode = 1
 size_flags_vertical = 3
-availableSkills = Array[Resource]([ExtResource("12_21a4c"), ExtResource("12_s3ef5"), ExtResource("14_xrjs8"), ExtResource("15_xwpgq")])
-skillsListStash = NodePath("../SkillsList/SkillsList/SkillsListStash")
+skillsListStash = NodePath("../SkillsList/MarginContainer/SkillsList/SkillsListStash")
+skillsList = NodePath("../SkillsList")
+
+[node name="SkillsList" parent="UIContainer/RootUI/VBoxContainer/Control/Control" instance=ExtResource("9_hyslg")]
+visible = false
+layout_mode = 1
+size_flags_vertical = 3
+
+[node name="SkillsListStash" parent="UIContainer/RootUI/VBoxContainer/Control/Control/SkillsList/MarginContainer/SkillsList" index="1"]
+initialItems = Array[Resource]([ExtResource("21_j3luw"), ExtResource("27_knuqs"), ExtResource("12_s3ef5"), ExtResource("28_ltjkc"), ExtResource("14_xrjs8"), ExtResource("12_21a4c")])
+
+[node name="Control" parent="UIContainer/RootUI/VBoxContainer/Control/Control/SkillsList" index="1"]
+mouse_filter = 2
+
+[node name="Button" parent="UIContainer/RootUI/VBoxContainer/Control/Control/SkillsList/Control" index="0"]
+mouse_default_cursor_shape = 2
+
+[node name="Achievements" parent="UIContainer/RootUI/VBoxContainer/Control/Control" instance=ExtResource("18_eqky7")]
+visible = false
+layout_mode = 1
+
+[node name="Character" type="TextureRect" parent="UIContainer"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -548.0
+offset_right = 368.0
+grow_vertical = 0
+expand_mode = 5
 
 [node name="EffectsLabelsContainer" type="Node2D" parent="."]
+process_mode = 3
 z_index = 10
 position = Vector2(-1, -1)
 
 [node name="Cutscenes" type="Node" parent="." node_paths=PackedStringArray("container")]
+process_mode = 3
 script = ExtResource("17_kyve0")
 entryTitles = ExtResource("18_m3xi6")
 exposition = ExtResource("19_pnvvk")
@@ -163,20 +242,21 @@ ending = ExtResource("24_yj6t6")
 death = ExtResource("25_3y687")
 container = NodePath("../UIContainer")
 
+[node name="GameplayUI" type="CanvasLayer" parent="."]
+
+[node name="PermanentGlobalSkills" type="Node" parent="."]
+
+[connection signal="LevelUp" from="Elements/Player/XPConsumer" to="UIContainer/RootUI/VBoxContainer/Control/Control/SkillQueueStore" method="OnLevelUp"]
+[connection signal="HealthDepleted" from="Elements/Player/Stats" to="Cutscenes" method="OnPlayerDeath"]
+[connection signal="timeout" from="UIContainer/RootUI/VBoxContainer/Control/GameTimer/Timer" to="UIContainer/RootUI/VBoxContainer/Control/GameTimer" method="SubtractSecond"]
+
 [editable path="Elements/Player"]
 [editable path="Elements/Player/DamageReceive"]
+[editable path="Elements/Player/Spawners/BossSpawner"]
 [editable path="Elements/Player/Spawners/EnemySpawn"]
+[editable path="Elements/Artifact"]
 [editable path="Elements/Enemy"]
 [editable path="Elements/Enemy/DamageReceive"]
 [editable path="Elements/Enemy/DeathAura"]
-[editable path="Elements/Enemy2"]
-[editable path="Elements/Enemy2/DamageReceive"]
-[editable path="Elements/Enemy2/DeathAura"]
-[editable path="Elements/Enemy3"]
-[editable path="Elements/Enemy3/DamageReceive"]
-[editable path="Elements/Enemy3/DeathAura"]
-[editable path="UIContainer/RootUI/VBoxContainer/SkillsList"]
-[editable path="UIContainer/RootUI/VBoxContainer/SkillsList/SkillsList/SkillsListActiveQueue"]
-[editable path="UIContainer/RootUI/VBoxContainer/SkillsList/SkillsList/SkillsListActiveQueue/SkillsListScrollable"]
-[editable path="UIContainer/RootUI/VBoxContainer/SkillsList/SkillsList/SkillsListStash"]
-[editable path="UIContainer/RootUI/VBoxContainer/SkillsList/SkillsList/SkillsListStash/SkillsListScrollable"]
+[editable path="UIContainer/RootUI/VBoxContainer/Control/Control/SkillQueueStore"]
+[editable path="UIContainer/RootUI/VBoxContainer/Control/Control/SkillsList"]

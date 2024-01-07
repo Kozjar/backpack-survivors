@@ -9,10 +9,11 @@ public partial class EntryTitles : Cutscene
   {
     base._Ready();
     var tween = GetTree().CreateTween();
+    tween.SetPauseMode(Tween.TweenPauseMode.Process);
 
     teamTitle.Modulate = new Color(1, 1, 1, 0); // start transparent
-    tween.TweenProperty(teamTitle, "modulate:a", 1, 3);
-    // tween.TweenCallback(Callable.From(OnTeamTitleFinished));
+    tween.TweenProperty(teamTitle, "modulate:a", 1, 2f);
+    tween.TweenCallback(Callable.From(OnTweenTitleFinished));
   }
 
   public override void _Process(double delta)
@@ -20,14 +21,12 @@ public partial class EntryTitles : Cutscene
     base._Process(delta);
   }
 
-  void OnTeamTitleFinished()
+  void OnTweenTitleFinished()
   {
-    GD.Print("OntweekTitleFinished");
-    // GetTree().CreateTimer(2).Timeout += () =>
-    // {
-    //   GD.Print("OnTeamTitleFinished");
-    //   EmitSignal(SignalName.Finished);
-    // };
+    GetTree().CreateTimer(0.5f).Timeout += () =>
+    {
+      EmitSignal(SignalName.Finished);
+    };
   }
 }
 

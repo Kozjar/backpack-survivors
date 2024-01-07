@@ -1,18 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://lkff3t7xa8h7"]
+[gd_scene load_steps=5 format=3 uid="uid://lkff3t7xa8h7"]
 
-[ext_resource type="StyleBox" uid="uid://coyi1678qxf7k" path="res://theme/Boxes/BorderlessBox.tres" id="1_a0s02"]
 [ext_resource type="PackedScene" uid="uid://cf000mdlnr7ol" path="res://scenes/UI/SkillsList/Scrollable/SkillsListScrollable.tscn" id="1_otk5o"]
 [ext_resource type="Script" path="res://scenes/UI/SkillsList/Stash/SkillsListStash.cs" id="2_dt6cn"]
 [ext_resource type="PackedScene" uid="uid://3rufyafccmxf" path="res://scenes/UI/SkillsList/Stash/SkillView/StashSkillView.tscn" id="3_68tfp"]
 [ext_resource type="PackedScene" uid="uid://cj1j0sc8eiaa6" path="res://scenes/UI/SkillsList/SkillView/SkillDropPreview.tscn" id="5_gm5ja"]
 
-[node name="SkillsListStash" type="PanelContainer" node_paths=PackedStringArray("skillsContainer", "dropPreview")]
+[node name="SkillsListStash" type="Control" node_paths=PackedStringArray("skillsContainer", "dropPreview")]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("1_a0s02")
 script = ExtResource("2_dt6cn")
 skillsContainer = NodePath("SkillsListScrollable/VBoxContainer/PanelContainer/SkillsListScrollable/MarginContainer/HBoxContainer")
 stashSkillView = ExtResource("3_68tfp")
@@ -20,7 +19,7 @@ initialItems = Array[Resource]([])
 dropPreview = NodePath("SkillsListScrollable/VBoxContainer/PanelContainer/MarginContainer/PanelContainer")
 
 [node name="SkillsListScrollable" parent="." instance=ExtResource("1_otk5o")]
-layout_mode = 2
+layout_mode = 1
 
 [node name="Label" parent="SkillsListScrollable/VBoxContainer/PanelContainer2/MarginContainer" index="0"]
 text = "Stash"

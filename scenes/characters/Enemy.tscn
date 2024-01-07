@@ -29,10 +29,10 @@ shape = SubResource("CircleShape2D_7h0m1")
 material = SubResource("ShaderMaterial_buk7p")
 texture = ExtResource("3_lsok5")
 
-[node name="DamageReceive" parent="." node_paths=PackedStringArray("statsComponent", "sprite", "character", "parent") instance=ExtResource("3_j5auc")]
+[node name="DamageReceive" parent="." node_paths=PackedStringArray("statsComponent", "sprite", "labeledCharacter", "parent") instance=ExtResource("3_j5auc")]
 statsComponent = NodePath("../Stats")
 sprite = NodePath("../Sprite2D")
-character = NodePath("../Sprite2D")
+labeledCharacter = NodePath("../Sprite2D")
 parent = NodePath("..")
 
 [node name="Stats" type="Node" parent="."]
@@ -53,7 +53,7 @@ offset_right = 20.0
 offset_bottom = -34.0
 statsComponent = NodePath("../Stats")
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("statsComponent", "entityRoot")]
+[node name="XpDrop" type="Node" parent="." node_paths=PackedStringArray("statsComponent", "entityRoot")]
 script = ExtResource("7_dyd75")
 statsComponent = NodePath("../Stats")
 xpScene = ExtResource("8_3alrl")

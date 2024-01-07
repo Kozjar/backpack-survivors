@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://b4ualeyw2jjni"]
+
+[ext_resource type="PackedScene" uid="uid://dudpfqtw7n31s" path="res://scenes/UI/SkillsList/Skill/Global/GlobalMoreCritChance/GlobalMoreCritChance.tscn" id="1_g6scf"]
+[ext_resource type="Texture2D" uid="uid://d3m066t4aerxc" path="res://assets/icons/wc/BTNGhost.jpg" id="2_v2tot"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Global/SkillGlobalResource.cs" id="3_0b8v6"]
+
+[resource]
+script = ExtResource("3_0b8v6")
+SkillScene = ExtResource("1_g6scf")
+Name = "Увеличение шанса крита"
+Description = "Увеличивает шанс нанести критическую атаку на 100%. (у разных атак разный базовый крит шанс)"
+icon = ExtResource("2_v2tot")
+skillRarity = 0

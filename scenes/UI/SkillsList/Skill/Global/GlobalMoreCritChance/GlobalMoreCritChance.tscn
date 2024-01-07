@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dudpfqtw7n31s"]
+
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Global/GlobalMoreCritChance/GlobalMoreCritChance.cs" id="1_yke05"]
+
+[node name="GlobalMoreCritChance" type="Node"]
+script = ExtResource("1_yke05")

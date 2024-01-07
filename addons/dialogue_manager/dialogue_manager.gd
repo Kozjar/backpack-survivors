@@ -386,6 +386,8 @@ func get_line(resource: DialogueResource, key: String, extra_game_states: Array)
 
 	# If we are the first of a list of responses then get the other ones
 	if data.type == DialogueConstants.TYPE_RESPONSE:
+		if line == null:
+			return line;
 		line.responses = await get_responses(data.responses, resource, id_trail, extra_game_states)
 		return line
 

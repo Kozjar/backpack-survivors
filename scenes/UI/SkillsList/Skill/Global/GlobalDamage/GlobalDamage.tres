@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dvttx55k3d7t3"]
+
+[ext_resource type="PackedScene" uid="uid://3iltcc4es80o" path="res://scenes/UI/SkillsList/Skill/Global/GlobalDamage/GlobalDamage.tscn" id="1_tddn6"]
+[ext_resource type="Texture2D" uid="uid://b25ty67tofe2n" path="res://assets/icons/wc/BTNCarrionSwarm.jpg" id="2_0lx6f"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Global/SkillGlobalResource.cs" id="3_0ueox"]
+
+[resource]
+script = ExtResource("3_0ueox")
+SkillScene = ExtResource("1_tddn6")
+Name = "Увеличение урона"
+Description = "Увеличивает весь урон на 30%"
+icon = ExtResource("2_0lx6f")
+skillRarity = 0

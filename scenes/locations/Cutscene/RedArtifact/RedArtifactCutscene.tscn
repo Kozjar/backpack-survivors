@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdrbhru2dwfmw"]
+
+[ext_resource type="Script" path="res://scenes/locations/Cutscene/RedArtifact/RedArtifactCutscene.cs" id="1_btee2"]
+
+[node name="RedArtifactCutscene" type="Node"]
+script = ExtResource("1_btee2")

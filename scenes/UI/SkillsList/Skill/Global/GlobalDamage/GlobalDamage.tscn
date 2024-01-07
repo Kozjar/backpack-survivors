@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3iltcc4es80o"]
+
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Global/GlobalDamage/GlobalDamage.cs" id="1_66ktg"]
+
+[node name="GlobalDamage" type="Node"]
+script = ExtResource("1_66ktg")

@@ -1,6 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://byb05goiu4mc"]
+[gd_scene load_steps=4 format=3 uid="uid://byb05goiu4mc"]
 
 [ext_resource type="Script" path="res://scenes/locations/Cutscene/Departure/Departure.cs" id="1_ceaqv"]
+[ext_resource type="Resource" uid="uid://cxn8kumfrufh3" path="res://dialogs/Departure.dialogue" id="2_dv18j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e50o0"]
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
 
 [node name="Departure" type="Node"]
 script = ExtResource("1_ceaqv")
+dialog = ExtResource("2_dv18j")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e50o0")

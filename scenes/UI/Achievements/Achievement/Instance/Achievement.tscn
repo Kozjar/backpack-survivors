@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx36l6m7irayk"]
+
+[ext_resource type="Script" path="res://scenes/UI/Achievements/Achievement/Instance/Achievement.cs" id="1_3rlkh"]
+
+[node name="Achievement" type="Node"]
+script = ExtResource("1_3rlkh")

@@ -9,7 +9,7 @@ public partial class DamageReceiveComponent : Area2D
   [Export] PackedScene damageLabel;
 
   [Export] Color damageColor;
-  [Export] Sprite2D character;
+  [Export] Sprite2D labeledCharacter;
   [Export] public Node2D parent;
   ControlledShaderManager shaderManager;
 
@@ -31,7 +31,7 @@ public partial class DamageReceiveComponent : Area2D
 
       var label = damageLabel.Instantiate<DamageLabel>();
       GetTree().Root.GetNode("root/EffectsLabelsContainer").AddChild(label);
-      label.Initialize((float)damage, character, damageColor);
+      label.Initialize((float)damage, labeledCharacter, damageColor);
     }
   }
 }

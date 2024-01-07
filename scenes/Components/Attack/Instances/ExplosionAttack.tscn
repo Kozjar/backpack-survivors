@@ -8,9 +8,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_sl63y"]
 radius = 60.0
 
-[node name="ExplosionAttack" type="Area2D"]
+[node name="ExplosionAttack" type="Area2D" node_paths=PackedStringArray("attackBehaviour") groups=["attack"]]
 collision_layer = 8
 script = ExtResource("1_b65ho")
+attackBehaviour = NodePath("StaticBehaviour")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sl63y")

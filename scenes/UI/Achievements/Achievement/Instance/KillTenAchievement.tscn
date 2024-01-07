@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxobn1asij0w6"]
+
+[ext_resource type="Script" path="res://scenes/UI/Achievements/Achievement/Instance/KillTenAchievement.cs" id="1_14p44"]
+[ext_resource type="Texture2D" uid="uid://dyetqqywkrdfi" path="res://assets/icons/wc/BTNAcolyte.jpg" id="2_5a5n4"]
+
+[node name="KillTenAchievement" type="Node"]
+script = ExtResource("1_14p44")
+name = "Десятка"
+condition = "Убить 10 противников."
+reward = "Новая атака - \"Взрыв\""
+icon = ExtResource("2_5a5n4")

@@ -13,11 +13,13 @@ public partial class Cutscenes : Node
   [Export] PackedScene death;
   [Export] Node container;
 
-  Cutscene currentCutscene;
+  Cutscene currentCutscene = null;
 
   public override void _Ready()
   {
     base._Ready();
+
+    // ShowCutscene(arrival);
 
     // var entryTitlesNode = ShowCutscene(entryTitles);
     // entryTitlesNode.Finished += () =>
@@ -25,7 +27,7 @@ public partial class Cutscenes : Node
     //   var expositionNode = ShowCutscene(exposition);
     //   expositionNode.Finished += () =>
     //   {
-    //     var departureNode = ShowCutscene(departure);
+    //     var departureNode = ShowCutscene(arrival);
 
     //     departureNode.Finished += () =>
     //     {
@@ -37,25 +39,33 @@ public partial class Cutscenes : Node
 
   Cutscene ShowCutscene(PackedScene scene)
   {
-    if (currentCutscene != null)
-    {
-      currentCutscene.QueueFree();
-    }
+    ClearCurrentCutscene();
+    SkillListGlobal.instance.PauseGameplay();
+    currentCutscene = scene.Instantiate<Cutscene>();
+    container.AddChild(currentCutscene);
 
-    var sceneNode = scene.Instantiate<Cutscene>();
-    container.AddChild(sceneNode);
-
-    return sceneNode;
+    return currentCutscene;
   }
 
 
   void StartGame()
   {
-    //   if (currentCutscene != null)
-    //   {
-    //     currentCutscene.QueueFree();
-    //   }
+    ClearCurrentCutscene();
+    SkillListGlobal.instance.ResumeGameplay();
+  }
 
-    //   SkillListGlobal.instance.ToggleGameplay();
+  void ClearCurrentCutscene()
+  {
+    if (currentCutscene != null)
+    {
+      currentCutscene.QueueFree();
+      currentCutscene = null;
+    }
+  }
+
+  public void OnPlayerDeath()
+  {
+    // SkillListGlobal.instance.PauseGameplay();
+    // ShowCutscene(death);
   }
 }

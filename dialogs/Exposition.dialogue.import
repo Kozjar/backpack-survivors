@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://bur66ul8k12uk"
+path="res://.godot/imported/Exposition.dialogue-52ba6b865d703f499136780756f69f14.tres"
+
+[deps]
+
+source_file="res://dialogs/Exposition.dialogue"
+dest_files=["res://.godot/imported/Exposition.dialogue-52ba6b865d703f499136780756f69f14.tres"]
+
+[params]
+
+defaults=true

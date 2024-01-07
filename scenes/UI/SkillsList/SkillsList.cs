@@ -11,4 +11,15 @@ public partial class SkillsList : PanelContainer
       Visible = !Visible;
     }
   }
+
+  public void Open()
+  {
+    Visible = true;
+  }
+
+  public void OnConfirm()
+  {
+    Visible = false;
+    SkillListGlobal.instance.ResumeGameplay();
+  }
 }

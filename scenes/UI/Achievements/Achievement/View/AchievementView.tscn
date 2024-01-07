@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcdsq1ylg2lsi"]
+
+[ext_resource type="Script" path="res://scenes/UI/Achievements/Achievement/View/AchievementView.cs" id="1_lo2fc"]
+[ext_resource type="Shader" path="res://scenes/Shaders/Grayscale.gdshader" id="2_3bt0j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i5gqg"]
+shader = ExtResource("2_3bt0j")
+
+[node name="AchievementView" type="Control" node_paths=PackedStringArray("iconNode")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+script = ExtResource("1_lo2fc")
+iconNode = NodePath("PanelContainer/TextureRect")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+material = SubResource("ShaderMaterial_i5gqg")
+layout_mode = 2

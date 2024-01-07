@@ -3,16 +3,16 @@ using System;
 
 public partial class QueueSkillSelection : PanelContainer
 {
-  [Signal] public delegate void SkillSelectedEventHandler();
+  [Signal] public delegate void SkillSelectedEventHandler(SkillBaseResource skillResource);
   [Export] Label nameNode;
   [Export] Label descriptionNode;
   [Export] Label typeNode;
   [Export] TextureRect iconNode;
   [Export] Theme hoverTheme;
   Theme initialTheme;
-  public SkillResource skillResource;
+  public SkillBaseResource skillResource;
 
-  public void Init(SkillResource skillResource)
+  public void Init(SkillBaseResource skillResource)
   {
     this.skillResource = skillResource;
   }
@@ -35,7 +35,7 @@ public partial class QueueSkillSelection : PanelContainer
     // Mouse in viewport coordinates.
     if (@event is InputEventMouseButton eventMouseButton && !eventMouseButton.Pressed)
     {
-      EmitSignal(SignalName.SkillSelected);
+      EmitSignal(SignalName.SkillSelected, skillResource);
     }
   }
 }

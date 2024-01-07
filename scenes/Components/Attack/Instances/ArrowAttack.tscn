@@ -10,11 +10,12 @@
 shader = ExtResource("1_m10or")
 shader_parameter/progress = 0.5
 
-[node name="Attack" type="Area2D"]
+[node name="Attack" type="Area2D" node_paths=PackedStringArray("attackBehaviour") groups=["attack"]]
 material = SubResource("ShaderMaterial_gyp3j")
 scale = Vector2(0.5, 0.5)
 collision_layer = 8
 script = ExtResource("2_28d5n")
+attackBehaviour = NodePath("Projectile")
 
 [node name="Shape" type="Polygon2D" parent="." node_paths=PackedStringArray("collisionPolygon2D")]
 color = Color(1, 1, 1, 0.509804)

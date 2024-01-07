@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dtmfvd3t3wvxn"]
+
+[ext_resource type="PackedScene" uid="uid://bjlv5jnvase5d" path="res://scenes/UI/SkillsList/Skill/Global/GlobalMovementSpeed/GlobalMovementSpeed.tscn" id="1_ix01k"]
+[ext_resource type="Texture2D" uid="uid://caudfycif6g2k" path="res://assets/icons/wc/BTNEnchantedGemstone.jpg" id="2_lbds4"]
+[ext_resource type="Script" path="res://scenes/UI/SkillsList/Skill/Global/SkillGlobalResource.cs" id="3_57ddc"]
+
+[resource]
+script = ExtResource("3_57ddc")
+SkillScene = ExtResource("1_ix01k")
+Name = "Скорость бега"
+Description = "Увеличивает скорость передвижения на 20%"
+icon = ExtResource("2_lbds4")
+skillRarity = 0

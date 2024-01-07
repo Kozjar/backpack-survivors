@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Projectile : Node
+public partial class Projectile : AttackBahaviour
 {
   [Export] Node2D attack;
   [Export] float speed = 400f;
@@ -24,5 +24,20 @@ public partial class Projectile : Node
       return;
     }
     attack.Position += Vector2.Right.Rotated(attack.Rotation).Normalized() * distance;
+  }
+
+  public override void InitializePosition(Vector2 position, Vector2? target = null)
+  {
+    base.InitializePosition(position, target);
+    if (target != null)
+    {
+      attack.LookAt(attack.GlobalPosition - target.Value);
+    }
+    else
+    {
+      var direction = Vector2.Up;
+      var randomRotation = GD.RandRange(-MathF.PI, MathF.PI);
+      attack.LookAt(attack.GlobalPosition - direction.Rotated((float)randomRotation));
+    }
   }
 }

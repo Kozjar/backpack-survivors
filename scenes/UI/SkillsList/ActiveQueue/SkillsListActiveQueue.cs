@@ -2,7 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class SkillsListActiveQueue : PanelContainer, ISkillContainer
+public partial class SkillsListActiveQueue : Control, ISkillContainer
 {
   public LinkedList<Trigger> triggers = new();
   [Export] PackedScene emptySlotScene;
@@ -17,6 +17,8 @@ public partial class SkillsListActiveQueue : PanelContainer, ISkillContainer
   TriggerView hiddenTrigger;
   EmptySkillSlot tmpSlot;
 
+  public static SkillsListActiveQueue instance;
+
 
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
@@ -26,6 +28,7 @@ public partial class SkillsListActiveQueue : PanelContainer, ISkillContainer
     BuildEmptySlots();
     SkillListGlobal.instance.DragStarted += OnDragStarted;
     SkillListGlobal.instance.DragEnded += OnDragEnded;
+    instance = this;
   }
 
   void OnDragStarted(SkillData skillData)
@@ -68,13 +71,22 @@ public partial class SkillsListActiveQueue : PanelContainer, ISkillContainer
     }
   }
 
-  void BuildEmptySlots()
+  public void BuildEmptySlots()
   {
     var existedEmptySlots = skillsContainer.GetChildren().OfType<EmptySkillSlot>();
     for (int i = 0; i < EmptySlots - existedEmptySlots.Count(); i++)
     {
       AddEmptySlot();
     }
+  }
+
+  public void RemoveEmptySlot()
+  {
+    if (FirstEmptySlot == null)
+    {
+      RemoveSkill(triggers.Last.Value);
+    }
+    FirstEmptySlot.QueueFree();
   }
 
   EmptySkillSlot AddEmptySlot()

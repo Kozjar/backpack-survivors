@@ -5,44 +5,36 @@ using System.Linq;
 
 public partial class SkillQueueStore : Control
 {
-  [Export] SkillResource[] availableSkills;
+  [Export] public SkillResource[] initialSkills;
+  [Export] public SkillGlobalResource[] initialGlobalSkills;
   [Export] Control skillsContainer;
   [Export] PackedScene skillSelectionScene;
   [Export] SkillsListStash skillsListStash;
+  [Export] Node globalSkillsContainer;
+  [Export] SkillsList skillsList;
 
-  public List<SkillResource> AvailableSkills => availableSkills.ToList();
+  public static SkillQueueStore instance;
+
+  public List<SkillResource> availableSkills;
+  public List<SkillGlobalResource> availableGlobalSkills;
 
   public override void _Ready()
   {
     base._Ready();
+    instance = this;
+    availableSkills = new List<SkillResource>(initialSkills);
+    availableGlobalSkills = new List<SkillGlobalResource>(initialGlobalSkills);
     // ShowSkillSelection(1, 1f);
   }
 
-  private SkillResource GetRandomSkill(List<SkillResource> skills)
+  public List<SkillBaseResource> GetSequense(int amount, List<SkillBaseResource> list)
   {
-    if (skills.Count == 0) return null;
-    var totalWeight = skills.Sum((skill) => skill.Weight);
-    var seedWeight = GD.Randi() % totalWeight;
-
-    int tmpWeight = 0;
-
-    return skills.Find((skill) =>
-    {
-      tmpWeight += skill.Weight;
-
-      return tmpWeight > seedWeight;
-    });
-  }
-
-  public List<SkillResource> GetSequense(int amount)
-  {
-    var remainingSkills = new List<SkillResource>(AvailableSkills);
-    var result = new List<SkillResource>();
+    var remainingSkills = new List<SkillBaseResource>(list);
+    var result = new List<SkillBaseResource>();
 
     for (int i = 0; i < amount; i++)
     {
-      var skill = GetRandomSkill(remainingSkills);
-      GD.Print(skill);
+      var skill = SkillListGlobal.RandomWeighted(remainingSkills);
 
       if (skill != null)
       {
@@ -54,16 +46,48 @@ public partial class SkillQueueStore : Control
     return result;
   }
 
-  public void ShowSkillSelection(int level, float mxXp)
+  public void OnLevelUp(int level, float mxXp)
   {
     Visible = true;
     SkillListGlobal.instance.ToggleGameplay();
-    var skillsOffer = GetSequense(3);
+
+    if (level % 5 == 0)
+    {
+      OfferGlobalSkills();
+    }
+    else
+    {
+      OfferQueueSkills();
+    }
+  }
+
+  void OfferQueueSkills()
+  {
+    var skillsOffer = GetSequense(3, availableSkills.ToList<SkillBaseResource>());
+    ShowSkillSelection(skillsOffer, (skill) => AddSkillToStash((SkillResource)skill));
+  }
+
+  void OfferGlobalSkills()
+  {
+    var skillsOffer = GetSequense(3, availableGlobalSkills.ToList<SkillBaseResource>());
+    QueueSkillSelection.SkillSelectedEventHandler callback = (skill) =>
+    {
+      globalSkillsContainer.AddChild(((SkillGlobalResource)skill).SkillScene.Instantiate());
+      Close();
+      SkillListGlobal.instance.ResumeGameplay();
+    };
+    ShowSkillSelection(skillsOffer, callback);
+  }
+
+  public void ShowSkillSelection(List<SkillBaseResource> skillsOffer, QueueSkillSelection.SkillSelectedEventHandler Callback)
+  {
+    // var skillsOffer = GetSequense(3);
     foreach (var skill in skillsOffer)
     {
       var skillSelection = skillSelectionScene.Instantiate<QueueSkillSelection>();
       skillSelection.Init(skill);
-      skillSelection.SkillSelected += () => AddSkillToStash(skill);
+      // skillSelection.SkillSelected += () => AddSkillToStash(skill);
+      skillSelection.SkillSelected += Callback;
       skillsContainer.AddChild(skillSelection);
     }
   }
@@ -71,8 +95,12 @@ public partial class SkillQueueStore : Control
   void AddSkillToStash(SkillResource skillResource)
   {
     skillsListStash.AddSkillFromRsource(skillResource);
+    Close();
+    skillsList.Open();
+  }
+  void Close()
+  {
     Visible = false;
-    SkillListGlobal.instance.ToggleGameplay();
     skillsContainer.GetChildren().ToList().ForEach(child => child.QueueFree());
   }
 }

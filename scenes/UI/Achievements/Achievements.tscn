@@ -1,0 +1,125 @@
+[gd_scene load_steps=11 format=3 uid="uid://de2vwnu5uxdyu"]
+
+[ext_resource type="Theme" uid="uid://tjtdevjpxve3" path="res://theme/Main.tres" id="1_lw8qr"]
+[ext_resource type="Script" path="res://scenes/UI/Achievements/Achievements.cs" id="1_qxece"]
+[ext_resource type="PackedScene" uid="uid://cxobn1asij0w6" path="res://scenes/UI/Achievements/Achievement/Instance/KillTenAchievement.tscn" id="3_01j16"]
+[ext_resource type="Script" path="res://scenes/UI/Achievements/AchievementPreview.cs" id="3_by1eu"]
+[ext_resource type="PackedScene" uid="uid://bcdsq1ylg2lsi" path="res://scenes/UI/Achievements/Achievement/View/AchievementView.tscn" id="3_e842u"]
+[ext_resource type="Script" path="res://scenes/UI/Achievements/AttacksAtOnceTier1.cs" id="5_0v0rp"]
+[ext_resource type="StyleBox" uid="uid://sgf6fl4b8s45" path="res://theme/Boxes/SolidDark.tres" id="5_sdsa7"]
+[ext_resource type="Texture2D" uid="uid://dydpmr4fwfac5" path="res://assets/icons/wc/BTNBanshee.jpg" id="6_heokj"]
+[ext_resource type="Shader" path="res://scenes/Shaders/Grayscale.gdshader" id="7_nsyf5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_englo"]
+shader = ExtResource("7_nsyf5")
+
+[node name="Achievements" type="Control" node_paths=PackedStringArray("achievementPreview", "achievementsInstancesContainer", "achievementContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_lw8qr")
+script = ExtResource("1_qxece")
+achievementPreview = NodePath("PanelContainer/MarginContainer/VBoxContainer/PanelContainer")
+achievementsInstancesContainer = NodePath("Instances")
+achievementContainer = NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer")
+achievementScene = ExtResource("3_e842u")
+
+[node name="Instances" type="Node" parent="."]
+
+[node name="KillTenAchievement" parent="Instances" instance=ExtResource("3_01j16")]
+
+[node name="AttacksAtOnceTier1" type="Node" parent="Instances"]
+script = ExtResource("5_0v0rp")
+name = "Быстрый стрелок 1"
+condition = "Имейте одновременно 10 атак на экране."
+reward = "Новая атака - \"Святая вода\""
+icon = ExtResource("6_heokj")
+
+[node name="Timer" type="Timer" parent="Instances/AttacksAtOnceTier1"]
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("5_sdsa7")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("iconNode", "NameNode", "ConditionNode", "RewardNode")]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+script = ExtResource("3_by1eu")
+iconNode = NodePath("MarginContainer/HBoxContainer/PanelContainer/TextureRect")
+NameNode = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Label")
+ConditionNode = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Condition/Label")
+RewardNode = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Reward/Label")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/PanelContainer"]
+material = SubResource("ShaderMaterial_englo")
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Название ачивки"
+
+[node name="Condition" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Condition"]
+layout_mode = 2
+text = "Условие:"
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Condition"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.658824, 0.658824, 1)
+text = "Убить 1000 противников"
+
+[node name="Reward" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Reward"]
+layout_mode = 2
+text = "Награда:"
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/Reward"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.658824, 0.658824, 1)
+text = "Новая триггер - \"при атаке\""
+
+[connection signal="timeout" from="Instances/AttacksAtOnceTier1/Timer" to="Instances/AttacksAtOnceTier1" method="Validate"]
